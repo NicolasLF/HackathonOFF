@@ -26,20 +26,20 @@ $pdo = new PDO(DSN, USER, PASS);
 
 
 $id = $_GET["id"];
-$name = $_GET['name'];
-echo $name;
-echo "<br/>";
-$image = $_GET['img'];
-echo "<img src=" . $image . ">";
-echo "<br/>";
-$quantity = $_GET['quantity'];
-echo $quantity;
-echo "<br/>";
-$grade = $_GET['grade'];
-echo $grade;
-echo "<br/>";
-$energy = $_GET['energy'];
-echo $energy;
+//$name = $_GET['name'];
+//echo $name;
+//echo "<br/>";
+//$image = $_GET['img'];
+//echo "<img src=" . $image . ">";
+//echo "<br/>";
+//$quantity = $_GET['quantity'];
+//echo $quantity;
+//echo "<br/>";
+//$grade = $_GET['grade'];
+//echo $grade;
+//echo "<br/>";
+//$energy = $_GET['energy'];
+//echo $energy;
 
 function cleanString($string) {
     // on supprime : majuscules ; / ? : @ & = + $ , . ! ~ * ( ) les espaces multiples et les underscore
@@ -82,10 +82,12 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
             echo "<br/>";
             echo $msg->brands;
             echo "<br/>";
+            $quantity = $msg->quantity;
             echo $msg->quantity;
             echo "<br/>";
             echo $msg->nutrition_grade_fr;
             echo "<br/>";
+            $energy = $msg->nutriments->energy_value;
             echo round($msg->nutriments->energy_value / 4.1868) . " kcal pour 100g";
             echo "<br/>";
             echo round(($msg->nutriments->energy_value * $msg->quantity / 100) / 4.1868) . " kcal";
@@ -118,8 +120,8 @@ if (isset($_POST['sport'])) {
     $res = $req->fetch();
     echo '<br /><p>Vous avez choisi : '. $sport .' qui vous fait perdre : '. $res['kcalh'] .' kcal/h !</p><br />';
     $energyKcal = round(($energy/4.1868)*($quantity/100));
-    $sportHours = round($energyKcal/$res['kcalh']);
-    $sportMinutes = round(($energyKcal/$res['kcalh']-round($energyKcal/$res['kcalh']))*60);
+    $sportHours = floor($energyKcal/$res['kcalh']);
+    $sportMinutes = round(($energyKcal/$res['kcalh']-floor($energyKcal/$res['kcalh']))*60);
     echo '<p>Il faut donc que vous fassiez '. $sportHours .' heures et '. $sportMinutes .' minutes de sport !!<br />Il y a encore du taf !</p>';
 }
 ?>

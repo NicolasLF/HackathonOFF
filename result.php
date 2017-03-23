@@ -10,7 +10,7 @@ function cleanString($string) {
 }
 
 if(isset($_POST['name']) && !empty($_POST['name'])) {
-    $motRecherche = urlencode(cleanString($_POST['name']));
+    $searchedName = urlencode(cleanString($_POST['name']));
 
     $dir = 'cache';
     $match = '';

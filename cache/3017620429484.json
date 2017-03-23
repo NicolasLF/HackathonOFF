@@ -1,0 +1,1578 @@
+<!doctype html>
+<html class="no-js" lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://static.openfoodfacts.org/foundation/css/app.css" />
+    <link rel="stylesheet" href="https://static.openfoodfacts.org/foundation/foundation-icons/foundation-icons.css" />
+    <script src="https://static.openfoodfacts.org/foundation/js/vendor/modernizr.js"></script>
+	
+<title>Nutella - ferrero - 825 g</title>
+
+<meta name="description" content="Ingrédients, allergènes, additifs, composition nutritionnelle, labels, origine des ingrédients et informations du produit Nutella - ferrero - 825 g" />
+	
+<script src="https://static.openfoodfacts.org/foundation/js/vendor/jquery.js"></script>
+<script type="text/javascript" src="https://static.openfoodfacts.org/js/jquery-ui-1.11.4/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://static.openfoodfacts.org/js/jquery-ui-1.11.4/jquery-ui.min.css" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" integrity="sha384-HIipfSYbpCkh5/1V87AWAeR5SUrNiewznrUrtNz1ux4uneLhsAKzv/0FnMbj3m6g" crossorigin="anonymous">
+<link rel="search" href="https://fr.openfoodfacts.org/cgi/opensearch.pl" type="application/opensearchdescription+xml" title="Open Food Facts" />
+
+<script>
+$(function() {
+$("#select_country").select2({
+	placeholder: "Pays",
+    allowClear: true
+	}
+	).on("select2:select", function(e) {
+	var subdomain =  e.params.data.id;
+	if (! subdomain) {
+		subdomain = 'world';
+	}
+	window.location.href = "http://" + subdomain + ".openfoodfacts.org";
+}).on("select2:unselect", function(e) {
+
+	window.location.href = "http://world.openfoodfacts.org";
+})
+;
+
+$('input:radio[name=nutrition_data_compare_type]').change(function () {
+		
+	if ($('input:radio[name=nutrition_data_compare_type]:checked').val() == 'compare_value') {
+		$(".compare_percent").hide();
+		$(".compare_value").show();
+	}
+	else {
+		$(".compare_value").hide();
+		$(".compare_percent").show();	
+	}
+
+}
+);
+
+$(".show_comparison").change(function () {
+	if ($(this).prop('checked')) {
+		$("." + $(this).attr("id")).show();		
+	}
+	else {
+		$("." + $(this).attr("id")).hide();		
+	}
+}
+);
+
+	
+// start off canvas blocks for small screens
+	
+    $('#imgupload_search_block_side').fileupload({
+        dataType: 'json',
+        url: '/cgi/product.pl',
+		formData : [{name: 'jqueryfileupload', value: 1}],
+		resizeMaxWidth : 2000,
+		resizeMaxHeight : 2000,
+        done: function (e, data) {
+			if (data.result.location) {
+				$(location).attr('href',data.result.location);
+			}
+			if (data.result.error) {
+				$("#imgsearcherror_block_side").html(data.result.error);
+				$("#imgsearcherror_block_side").show();
+			}
+        },
+		fail : function (e, data) {
+			$("#imgsearcherror_block_side").show();
+        },
+		always : function (e, data) {
+			$("#progressbar_block_side").hide();
+			$("#imgsearchbutton_block_side").show();
+			$("#imgsearchmsg_block_side").hide();
+        },
+		start: function (e, data) {
+			$("#imgsearchbutton_block_side").hide();
+			$("#imgsearcherror_block_side").hide();
+			$("#imgsearchmsg_block_side").show();
+			$("#progressbar_block_side").show();
+			$("#progressmeter_block_side").css('width', "0%");
+                    
+		},
+            sent: function (e, data) {
+                if (data.dataType &&
+                        data.dataType.substr(0, 6) === 'iframe') {
+                    // Iframe Transport does not support progress events.
+                    // In lack of an indeterminate progress bar, we set
+                    // the progress to 100%, showing the full animated bar:
+                    $("#progressmeter_block_side").css('width', "100%");
+                }
+            },
+            progress: function (e, data) {
+
+                   $("#progressmeter_block_side").css('width', parseInt(data.loaded / data.total * 100, 10) + "%");
+					$("#imgsearchdebug_block_side").html(data.loaded + ' / ' + data.total);
+                
+            }
+		
+    });	
+	
+// end off canvas blocks for small screens
+	
+
+	
+    $('#imgupload_search_block_aside').fileupload({
+        dataType: 'json',
+        url: '/cgi/product.pl',
+		formData : [{name: 'jqueryfileupload', value: 1}],
+		resizeMaxWidth : 2000,
+		resizeMaxHeight : 2000,
+        done: function (e, data) {
+			if (data.result.location) {
+				$(location).attr('href',data.result.location);
+			}
+			if (data.result.error) {
+				$("#imgsearcherror_block_aside").html(data.result.error);
+				$("#imgsearcherror_block_aside").show();
+			}
+        },
+		fail : function (e, data) {
+			$("#imgsearcherror_block_aside").show();
+        },
+		always : function (e, data) {
+			$("#progressbar_block_aside").hide();
+			$("#imgsearchbutton_block_aside").show();
+			$("#imgsearchmsg_block_aside").hide();
+        },
+		start: function (e, data) {
+			$("#imgsearchbutton_block_aside").hide();
+			$("#imgsearcherror_block_aside").hide();
+			$("#imgsearchmsg_block_aside").show();
+			$("#progressbar_block_aside").show();
+			$("#progressmeter_block_aside").css('width', "0%");
+                    
+		},
+            sent: function (e, data) {
+                if (data.dataType &&
+                        data.dataType.substr(0, 6) === 'iframe') {
+                    // Iframe Transport does not support progress events.
+                    // In lack of an indeterminate progress bar, we set
+                    // the progress to 100%, showing the full animated bar:
+                    $("#progressmeter_block_aside").css('width', "100%");
+                }
+            },
+            progress: function (e, data) {
+
+                   $("#progressmeter_block_aside").css('width', parseInt(data.loaded / data.total * 100, 10) + "%");
+					$("#imgsearchdebug_block_aside").html(data.loaded + ' / ' + data.total);
+                
+            }
+		
+    });	
+	
+
+});
+</script>
+
+<meta name="twitter:card" content="product">
+<meta name="twitter:site" content="@OpenFoodFactsFr">
+<meta name="twitter:creator" content="@OpenFoodFactsFr">
+<meta name="twitter:title" content="Nutella - ferrero - 825 g">
+<meta name="twitter:description" content="Ingrédients, allergènes, additifs, composition nutritionnelle, labels, origine des ingrédients et informations du produit Nutella - ferrero - 825 g">
+<meta name="twitter:image" content="https://static.openfoodfacts.org/images/products/301/762/042/9484/front_fr.8.full.jpg">
+<meta name="twitter:label1" content="marque">
+<meta name="twitter:data1" content="Ferrero">
+<meta name="twitter:label2" content="catégorie">
+<meta name="twitter:data2" content="Pâtes à tartiner aux noisettes et au cacao">
+
+<meta property="og:image" content="https://static.openfoodfacts.org/images/products/301/762/042/9484/front_fr.8.full.jpg">
+
+
+<meta property="fb:app_id" content="219331381518041" />
+<meta property="og:type" content="food"/>
+<meta property="og:title" content=""/>
+<meta property="og:url" content="https://fr.openfoodfacts.org/produit/3017620429484/nutella-ferrero"/>
+
+<meta property="og:image" content="https://static.openfoodfacts.org/images/misc/openfoodfacts-logo-fr-356.png"/>
+<meta property="og:description" content="Ingrédients, composition nutritionnelle et information sur les produits alimentaires du monde entier dans une base de données libre et ouverte"/>
+
+<link rel="apple-touch-icon" sizes="57x57" href="https://static.openfoodfacts.org/images/favicon/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://static.openfoodfacts.org/images/favicon/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://static.openfoodfacts.org/images/favicon/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://static.openfoodfacts.org/images/favicon/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://static.openfoodfacts.org/images/favicon/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://static.openfoodfacts.org/images/favicon/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://static.openfoodfacts.org/images/favicon/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://static.openfoodfacts.org/images/favicon/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://static.openfoodfacts.org/images/favicon/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="https://static.openfoodfacts.org/images/favicon/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="https://static.openfoodfacts.org/images/favicon/android-chrome-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="https://static.openfoodfacts.org/images/favicon/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="https://static.openfoodfacts.org/images/favicon/favicon-16x16.png" sizes="16x16">
+<link rel="manifest" href="https://static.openfoodfacts.org/images/favicon/manifest.json">
+<link rel="mask-icon" href="https://static.openfoodfacts.org/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="https://static.openfoodfacts.org/images/favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-TileImage" content="https://static.openfoodfacts.org/images/favicon/mstile-144x144.png">
+<meta name="msapplication-config" content="https://static.openfoodfacts.org/images/favicon/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+
+
+<style type="text/css" media="all">
+
+hr.floatclear {
+background: none;
+border: 0;
+clear: both;
+display: block;
+float: none;
+font-size: 0;
+margin: 0;
+padding: 0;
+overflow: hidden;
+visibility: hidden;
+width: 0;
+height: 0;
+}
+
+hr.floatleft {
+background: none;
+border: 0;
+clear: left;
+display: block;
+float: none;
+font-size: 0;
+margin: 0;
+padding: 0;
+overflow: hidden;
+visibility: hidden;
+width: 0;
+height: 0;
+}
+
+hr.floatright {
+background: none;
+border: 0;
+clear: right;
+display: block;
+float: none;
+font-size: 0;
+margin: 0;
+padding: 0;
+overflow: hidden;
+visibility: hidden;
+width: 0;
+height: 0;
+}
+
+
+
+.data_table label, .data_table input { display: inline}
+.data_table input, .data_table select { font-size: 1em }
+.nutriment_label  { text-align: left; width: 300px; }
+.nutriment_value { text-align: right }
+.nutriment_subx { font-size: 0.9em;}
+.data_table .nutriment_sub .nutriment_label { padding-left:20px;}
+input.nutriment_value { width:5rem; height:2.3125rem;}
+select.nutriment_unit { width:4rem; margin-bottom:0;}
+thead, tbody { margin:0px; padding:0px; }
+
+
+.data_table { margin-top:20px; padding:0px; vertical-align:middle; border-collapse:collapse}
+.data_table td, .data_table th { margin:0px; padding:0.2rem; padding-left:0.5rem;}
+.data_table .nutriment_head { background-color: #8888ff; color: white; }
+.data_table .nutriment_main { border-top:3px solid white; background-color: #ddddff;}
+.data_table .nutriment_sub, .data_table .nutriment_sub td { border-top: 1px solid #ddddff; background-color: #eeeeff; }
+.ui-autocomplete li { font-size: 1em;}
+#nutriment_carbon-footprint_tr { background-color:#ddffdd }
+
+ul.products {
+	list-style:none;
+	padding: 0;
+	margin: 0;	
+}
+
+.products li {
+	text-align:center;
+	display:block;
+	float:left;
+}
+
+.products a {
+	display:block;
+	width:120px;;
+	height:167px;
+	padding:10px;
+	margin:10px;
+	overflow:hidden;	
+}
+
+.products div {
+	width:120px;
+	height:100px;
+	line-height:100px;
+	text-align:center;
+	padding:0px;
+	margin:0px;
+	display: table-cell;
+	vertical-align:middle;
+}
+
+
+
+.products a:hover {
+	background:#f4f4f4;
+}
+
+.products img {
+	vertical-align:middle;
+}
+
+#pages {
+	margin-top:1.5rem;
+}
+
+a { text-decoration: none;}
+a, a:visited, a:hover { color: blue;}
+
+a:hover { text-decoration: underline; }
+
+a.button {
+	color:white;
+}
+
+a.button:hover {
+	text-decoration:none;
+}
+
+.level_3, a.level_3, a:visited.level_3, a:hover.level_3 {
+	color:red;
+}
+
+.level_2, a.level_2, a:visited.level_2, a:hover.level_2 {
+	color:darkorange;
+}
+
+.level_1, a.level_1, a:visited.level_1, a:hover.level_1 {
+	color:green;
+}
+
+
+<!-- foundation styles -->
+
+.row{
+  &.full-width{
+    max-width: 100% !important;
+    .row{
+      margin: 0 auto;
+      max-width: 62.5rem;
+      background: inherit;
+    }  
+  }
+}
+
+.select2-container--default .select2-selection--single {
+border-radius:0;
+font-size: 0.875rem;
+  position: relative;
+  height: 1.75rem;
+  top: 0.53125rem;
+  width:10rem;
+}
+
+.left-small {
+  border-right:0;
+}
+
+.tab-bar-section.middle {
+  right:0;
+}
+
+#aside_column {
+	padding:1rem;
+}
+
+.side-nav li a:not(.button) {
+  margin: 0 -1rem;
+  padding: 0.4375rem 1rem;
+  color:blue;
+}
+
+.side-nav li a:not(.button):hover, .side-nav li a:not(.button):focus {
+	color:blue;
+}
+
+
+@media only screen and (max-width: 64em) {
+a.button.icon {
+font-size:1rem;
+width:2rem;
+height:2rem;
+padding:0.5rem;
+}
+}
+
+.products {
+line-height:1.2;
+}
+
+#sharebuttons li { text-align:center; max-width:100px; }
+
+#footer > div {
+	padding:1rem;
+}
+
+.dark {
+	color:#f0f0f0;
+}
+
+.dark h4 {
+	color:white;
+}
+
+.dark a, .dark a:hover, .dark a:visited {
+	color:white;
+}
+
+@media only screen and (max-width: 40em) {
+#footer h4 {
+	font-size:1.125rem;
+}
+}
+
+.top-bar-section .has-dropdown>a:after {
+  border-color: transparent transparent transparent rgba(0,0,0,0.4);
+}
+
+
+@media only screen and (min-width: 40.063em) {
+.top-bar-section .has-dropdown>a:after {
+  border-color: rgba(0,0,0,0.4) transparent transparent transparent;
+}
+.top-bar-section ul li {
+  background: inherit;
+}
+#select_country_li {padding-left:0;}
+}
+
+#main_column {
+	padding-bottom:2rem;
+}
+
+.example { font-size: 0.8em; color:green; }
+.note { font-size: 0.8em; }
+.example, .note { margin-top:4px;margin-bottom:0px;margin-left:4px; }
+
+.tag.user_defined { font-style: italic; }
+
+
+.show-when-logged-in { display:none}
+
+.image_box {
+	text-align:center;
+	margin-bottom:2rem;
+}
+
+.field_div {
+	display:inline;
+	float:left;
+	margin-right:30px;
+	margin-top:10px;
+	margin-bottom:10px;
+}
+
+.field {
+	font-weight:bold;
+}
+
+.allergen {
+	font-weight:bold;
+}
+
+
+.compare_1 { display:none }
+.compare_2 { display:none }
+.compare_3 { display:none }
+.compare_4 { display:none }
+.compare_5 { display:none }
+.compare_6 { display:none }
+
+
+
+
+</style>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31851927-1']);
+  _gaq.push(['_setDomainName', 'openfoodfacts.org']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+	
+</head>
+<body about="/produit/3017620429484/nutella-ferrero" typeof="food:foodProduct">
+
+
+<nav class="top-bar" data-topbar role="navigation" id="top-bar">
+	<ul class="title-area">
+		<li class="name">
+			<h2><a href="/" style="font-size:1rem;">Open Food Facts</a></h2>
+		</li>
+		<!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+		<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+	</ul>
+
+	<section class="top-bar-section">
+
+
+	<!-- Left Nav Section -->	
+
+
+
+	<ul class="left">
+		<li class="has-form has-dropdown" id="select_country_li">
+<select id="select_country" style="width:100%">
+<option></option>
+<option value="world">World</option>
+<option value="af">Afghanistan</option>
+<option value="za">Afrique du Sud</option>
+<option value="ax">Åland</option>
+<option value="al">Albanie</option>
+<option value="dz">Algérie</option>
+<option value="de">Allemagne</option>
+<option value="ad">Andorre</option>
+<option value="ao">Angola</option>
+<option value="ai">Anguilla</option>
+<option value="ag">Antigua-et-Barbuda</option>
+<option value="sa">Arabie saoudite</option>
+<option value="ar">Argentine</option>
+<option value="am">Arménie</option>
+<option value="aw">Aruba</option>
+<option value="au">Australie</option>
+<option value="at">Autriche</option>
+<option value="az">Azerbaïdjan</option>
+<option value="bs">Bahamas</option>
+<option value="bh">Bahreïn</option>
+<option value="bd">Bangladesh</option>
+<option value="bb">Barbade</option>
+<option value="be">Belgique</option>
+<option value="bz">Belize</option>
+<option value="bj">Bénin</option>
+<option value="bm">Bermudes</option>
+<option value="bt">Bhoutan</option>
+<option value="by">Biélorussie</option>
+<option value="mm">Birmanie</option>
+<option value="bo">Bolivie</option>
+<option value="ba">Bosnie-Herzégovine</option>
+<option value="bw">Botswana</option>
+<option value="br">Brésil</option>
+<option value="bn">Brunei</option>
+<option value="bg">Bulgarie</option>
+<option value="bf">Burkina Faso</option>
+<option value="bi">Burundi</option>
+<option value="kh">Cambodge</option>
+<option value="cm">Cameroun</option>
+<option value="ca">Canada</option>
+<option value="cv">Cap-Vert</option>
+<option value="cl">Chili</option>
+<option value="cn">Chine</option>
+<option value="cy">Chypre</option>
+<option value="co">Colombie</option>
+<option value="km">Comores</option>
+<option value="kp">Corée du Nord</option>
+<option value="kr">Corée du Sud</option>
+<option value="cr">Costa Rica</option>
+<option value="ci">Côte d'Ivoire</option>
+<option value="hr">Croatie</option>
+<option value="cu">Cuba</option>
+<option value="cw">Curaçao</option>
+<option value="dk">Danemark</option>
+<option value="dj">Djibouti</option>
+<option value="dm">Dominique</option>
+<option value="eg">Égypte</option>
+<option value="ae">Émirats arabes unis</option>
+<option value="ec">Équateur</option>
+<option value="er">Érythrée</option>
+<option value="es">Espagne</option>
+<option value="ee">Estonie</option>
+<option value="ps">État de Palestine</option>
+<option value="us">États-Unis</option>
+<option value="et">Éthiopie</option>
+<option value="fj">Fidji</option>
+<option value="fi">Finlande</option>
+<option value="fr" selected>France</option>
+<option value="ga">Gabon</option>
+<option value="gm">Gambie</option>
+<option value="ge">Géorgie</option>
+<option value="gs">Géorgie du Sud-et-les Îles Sandwich du Sud</option>
+<option value="gh">Ghana</option>
+<option value="gi">Gibraltar</option>
+<option value="gr">Grèce</option>
+<option value="gd">Grenade</option>
+<option value="gl">Groenland</option>
+<option value="gp">Guadeloupe</option>
+<option value="gu">Guam</option>
+<option value="gt">Guatemala</option>
+<option value="gg">Guernesey</option>
+<option value="gn">Guinée</option>
+<option value="gw">Guinée-Bissau</option>
+<option value="gq">Guinée équatoriale</option>
+<option value="gy">Guyana</option>
+<option value="gf">Guyane</option>
+<option value="ht">Haïti</option>
+<option value="hn">Honduras</option>
+<option value="hk">Hong Kong</option>
+<option value="hu">Hongrie</option>
+<option value="bv">Île Bouvet</option>
+<option value="cx">Île Christmas</option>
+<option value="im">Île de Man</option>
+<option value="nf">Île Norfolk</option>
+<option value="ky">Îles Caïmans</option>
+<option value="cc">Îles Cocos</option>
+<option value="ck">Îles Cook</option>
+<option value="fo">Îles Féroé</option>
+<option value="hm">Îles Heard-et-MacDonald</option>
+<option value="fk">Îles Malouines</option>
+<option value="mp">Îles Mariannes du Nord</option>
+<option value="mh">Îles Marshall</option>
+<option value="um">Îles mineures éloignées des États-Unis</option>
+<option value="pn">Îles Pitcairn</option>
+<option value="tc">Îles Turques-et-Caïques</option>
+<option value="vg">Îles Vierges britanniques</option>
+<option value="vi">Îles Vierges des États-Unis</option>
+<option value="in">Inde</option>
+<option value="id">Indonésie</option>
+<option value="iq">Irak</option>
+<option value="ir">Iran</option>
+<option value="ie">Irlande</option>
+<option value="is">Islande</option>
+<option value="il">Israël</option>
+<option value="it">Italie</option>
+<option value="jm">Jamaïque</option>
+<option value="jp">Japon</option>
+<option value="je">Jersey</option>
+<option value="jo">Jordanie</option>
+<option value="kz">Kazakhstan</option>
+<option value="ke">Kenya</option>
+<option value="kg">Kirghizistan</option>
+<option value="ki">Kiribati</option>
+<option value="kw">Koweït</option>
+<option value="re">La Réunion</option>
+<option value="la">Laos</option>
+<option value="ls">Lesotho</option>
+<option value="lv">Lettonie</option>
+<option value="lb">Liban</option>
+<option value="lr">Liberia</option>
+<option value="ly">Libye</option>
+<option value="li">Liechtenstein</option>
+<option value="lt">Lituanie</option>
+<option value="lu">Luxembourg</option>
+<option value="mo">Macao</option>
+<option value="mg">Madagascar</option>
+<option value="my">Malaisie</option>
+<option value="mw">Malawi</option>
+<option value="mv">Maldives</option>
+<option value="ml">Mali</option>
+<option value="mt">Malte</option>
+<option value="ma">Maroc</option>
+<option value="mq">Martinique</option>
+<option value="mu">Maurice</option>
+<option value="mr">Mauritanie</option>
+<option value="yt">Mayotte</option>
+<option value="mx">Mexique</option>
+<option value="fm">Micronésie</option>
+<option value="md">Moldavie</option>
+<option value="mc">Monaco</option>
+<option value="mn">Mongolie</option>
+<option value="me">Monténégro</option>
+<option value="ms">Montserrat</option>
+<option value="mz">Mozambique</option>
+<option value="na">Namibie</option>
+<option value="nr">Nauru</option>
+<option value="np">Népal</option>
+<option value="ni">Nicaragua</option>
+<option value="ne">Niger</option>
+<option value="ng">Nigeria</option>
+<option value="nu">Niue</option>
+<option value="no">Norvège</option>
+<option value="nc">Nouvelle-Calédonie</option>
+<option value="nz">Nouvelle-Zélande</option>
+<option value="om">Oman</option>
+<option value="ug">Ouganda</option>
+<option value="uz">Ouzbékistan</option>
+<option value="pk">Pakistan</option>
+<option value="pw">Palaos</option>
+<option value="pa">Panama</option>
+<option value="pg">Papouasie-Nouvelle-Guinée</option>
+<option value="py">Paraguay</option>
+<option value="nl">Pays-Bas</option>
+<option value="bq">Pays-Bas caribéens</option>
+<option value="pe">Pérou</option>
+<option value="ph">Philippines</option>
+<option value="pl">Pologne</option>
+<option value="pf">Polynésie française</option>
+<option value="pr">Porto Rico</option>
+<option value="pt">Portugal</option>
+<option value="qa">Qatar</option>
+<option value="aq">Région antarctique</option>
+<option value="cf">République centrafricaine</option>
+<option value="mk">République de Macédoine</option>
+<option value="cd">République démocratique du Congo</option>
+<option value="do">République dominicaine</option>
+<option value="cg">République du Congo</option>
+<option value="cz">République tchèque</option>
+<option value="ro">Roumanie</option>
+<option value="uk">Royaume-Uni</option>
+<option value="ru">Russie</option>
+<option value="rw">Rwanda</option>
+<option value="eh">Sahara occidental</option>
+<option value="bl">Saint-Barthélemy</option>
+<option value="kn">Saint-Christophe-et-Niévès</option>
+<option value="sm">Saint-Marin</option>
+<option value="mf">Saint-Martin</option>
+<option value="sx">Saint-Martin</option>
+<option value="pm">Saint-Pierre-et-Miquelon</option>
+<option value="vc">Saint-Vincent-et-les-Grenadines</option>
+<option value="sh">Sainte-Hélène</option>
+<option value="lc">Sainte-Lucie</option>
+<option value="sb">Salomon</option>
+<option value="sv">Salvador</option>
+<option value="ws">Samoa</option>
+<option value="as">Samoa américaines</option>
+<option value="st">Sao Tomé-et-Principe</option>
+<option value="sn">Sénégal</option>
+<option value="rs">Serbie</option>
+<option value="sc">Seychelles</option>
+<option value="sl">Sierra Leone</option>
+<option value="sg">Singapour</option>
+<option value="sk">Slovaquie</option>
+<option value="si">Slovénie</option>
+<option value="so">Somalie</option>
+<option value="sd">Soudan</option>
+<option value="ss">Soudan du Sud</option>
+<option value="lk">Sri Lanka</option>
+<option value="se">Suède</option>
+<option value="ch">Suisse</option>
+<option value="sr">Suriname</option>
+<option value="sj">Svalbard et Jan Mayen</option>
+<option value="sz">Swaziland</option>
+<option value="sy">Syrie</option>
+<option value="tj">Tadjikistan</option>
+<option value="tw">Taiwan</option>
+<option value="tz">Tanzanie</option>
+<option value="td">Tchad</option>
+<option value="tf">Terres australes et antarctiques françaises</option>
+<option value="io">Territoire britannique de l'océan Indien</option>
+<option value="th">Thaïlande</option>
+<option value="tl">Timor oriental</option>
+<option value="tg">Togo</option>
+<option value="tk">Tokelau</option>
+<option value="to">Tonga</option>
+<option value="tt">Trinité-et-Tobago</option>
+<option value="tn">Tunisie</option>
+<option value="tm">Turkménistan</option>
+<option value="tr">Turquie</option>
+<option value="tv">Tuvalu</option>
+<option value="ua">Ukraine</option>
+<option value="uy">Uruguay</option>
+<option value="vu">Vanuatu</option>
+<option value="va">Vatican</option>
+<option value="ve">Venezuela</option>
+<option value="vn">Viêt Nam</option>
+<option value="wf">Wallis-et-Futuna</option>
+<option value="ye">Yémen</option>
+<option value="yu">Yougoslavie</option>
+<option value="zm">Zambie</option>
+<option value="zw">Zimbabwe</option>
+</select>
+		</li>
+		
+
+      <li class="has-dropdown">
+		<a href="https://fr.openfoodfacts.org/">Français</a>
+
+        <ul class="dropdown">			
+			<li><a href="https://fr-en.openfoodfacts.org/">English</a></li>
+        </ul>
+      </li>
+		
+	</ul>	
+
+	
+	<!-- Right Nav Section -->
+	<ul class="right">
+		<li class="show-for-large-up">
+			<form action="/cgi/search.pl">
+			<div class="row collapse ">
+
+					<div class="small-8 columns">
+						<input type="text" placeholder="Chercher un produit" name="search_terms" />
+						<input name="search_simple" value="1" type="hidden" />
+						<input name="action" value="process" type="hidden" />
+					</div>
+					<div class="small-4 columns">
+						 <button type="submit" title="Rechercher"><i class="fi-magnifying-glass"></i></button>
+					</div>
+
+			</div>
+			</form>	
+		</li>
+		
+		<li class="show-for-large-up"><a href="/cgi/search.pl" title="Recherche avancée"><i class="fi-plus"></i></a></li>
+		
+		<li class="show-for-large-up"><a href="/cgi/search.pl?graph=1" title="Graphiques et cartes"><i class="fi-graph-bar"></i></a></li>
+		
+		<li class="show-for-large-up divider"></li>
+	
+		<li><a href="/decouvrir">Découvrir</a></li>
+		<li><a href="/contribuer">Contribuer</a></li>
+
+	</ul>	
+	
+	</section>
+	
+
+</nav>
+
+
+<nav class="tab-bar show-for-small-only">
+
+  <div class="left-small" style="padding-top:4px;">
+    <a href="#idOfLeftMenu" role="button" aria-controls="idOfLeftMenu" aria-expanded="false" class="left-off-canvas-toggle button postfix">
+	<i class="fi-torso" style="color:white;font-size:1.8rem"></i></a>
+  </div>
+  <div class="middle tab-bar-section" style="padding-top:4px;">
+			<form action="/cgi/search.pl">
+			<div class="row collapse ">
+
+					<div class="small-8 columns">
+						<input type="text" placeholder="Chercher un produit" name="search_terms">
+						<input name="search_simple" value="1" type="hidden" />
+						<input name="action" value="process" type="hidden" />						
+					</div>
+					<div class="small-2 columns">
+						 <button type="submit" class="button postfix"><i class="fi-magnifying-glass"></i></button>
+					</div>
+					
+					<div class="small-2 columns">
+							<a href="/cgi/search.pl" title="Recherche avancée"><i class="fi-magnifying-glass"></i> <i class="fi-plus"></i></a>
+					</div>
+
+
+			</div>
+			</form>	  
+  </div>
+ </nav>
+
+ 
+ 
+ 
+<div class="off-canvas-wrap" data-offcanvas>
+  <div class="inner-wrap">
+
+
+    <!-- Off Canvas Menu -->
+    <aside class="left-off-canvas-menu">
+        <!-- whatever you want goes here -->
+		<div id="aside_column">
+
+	
+<div class="block">
+<h3 class="block_title">Ajouter un produit</h3>
+<div class="block_content">
+<form method="post" action="/cgi/product.pl" enctype="multipart/form-data"><div id="imgsearchdiv_block_aside">
+
+<a href="#" class="button small expand" id="imgsearchbutton_block_aside"><i class="fi-camera"></i> Photo avec code-barre
+<input type="file" accept="image/*" capture="camera" class="img_input" name="imgupload_search" id="imgupload_search_block_aside" style="position: absolute;
+    right:0;
+    bottom:0;
+    top:0;
+    cursor:pointer;
+    opacity:0;
+    font-size:40px;"/>
+</a>
+</div>
+
+<div id="progressbar_block_aside" class="progress" style="display:none">
+  <span id="progressmeter_block_aside" class="meter" style="width:0%"></span>
+</div>
+
+<div id="imgsearchmsg_block_aside" data-alert class="alert-box info" style="display:none">
+  Image en cours d'envoi
+  <a href="#" class="close">&times;</a>
+</div>
+
+<div id="imgsearcherror_block_aside" data-alert class="alert-box alert" style="display:none">
+  Erreur lors de l'envoi
+  <a href="#" class="close">&times;</a>
+</div>
+
+
+      <div class="row collapse">	  
+        <div class="small-9 columns">
+          <input type="text" name="code" placeholder="ou Code barre">
+        </div>
+        <div class="small-3 columns">
+           <input type="submit" value="Ajouter" class="button postfix" />
+        </div>
+      </div>
+	  
+	  <input type="submit" value="Produit sans code barre" class="button tiny" />
+</form>
+
+</div>
+</div>
+
+<div class="block">
+<h3 class="block_title">Se connecter</h3>
+<div class="block_content">
+<p>Connectez-vous pour ajouter des produits ou modifier leurs fiches.</p>
+
+<form method="post" action="/cgi/session.pl">
+<div class="row">
+<div class="small-12 columns">
+	<label>Nom d'utilisateur ou adresse e-mail :
+		<input type="text" name="user_id" autocomplete="username" />
+	</label>
+</div>
+<div class="small-12 columns">
+	<label>Mot de passe
+		<input type="password" name="password" autocomplete="current-password" />
+	</label>
+</div>
+<div class="small-12 columns">
+	<label>
+		<input type="checkbox" name="remember_me" value="on" />
+		Se souvenir de moi
+	</label>
+</div>
+</div>
+<input type="submit" name=".submit" value="Se connecter" class="button small" />
+</form>
+<p>Pas encore inscrit(e) ?
+<a href="/cgi/user.pl">Créez votre compte.</a></p>
+
+
+</div>
+</div>
+
+<div class="block">
+<h3 class="block_title">Partez en mission</h3>
+<div class="block_content">
+<a href="http://fr.openfoodfacts.org/mission/releveur-d-empreintes">
+<img src="https://static.openfoodfacts.org/images/misc/mission-releveur-d-empreintes.png" width="265" height="222" />
+</a>
+<p>Contribuez à Open Food Facts en ajoutant des produits et gagnez
+des étoiles en remplissant <a href="/missions">les missions</a> !</p>
+
+</div>
+</div>
+
+		
+		</div>
+    </aside>
+
+
+  <!-- close the off-canvas menu -->
+  <a class="exit-off-canvas"></a>
+
+  
+<!-- main row - comment used to remove left column and center content on some pages -->  
+<div class="row full-width" style="max-width: 100% !important;" data-equalizer>
+	<div class="xxlarge-1 xlarge-2 large-3 medium-4 columns hide-for-small" style="background-color:#fafafa;padding-top:1rem;" data-equalizer-watch>
+		<div class="sidebar">
+		
+<div style="text-align:center">
+<a href="/"><img id="logo" src="https://static.openfoodfacts.org/images/misc/openfoodfacts-logo-fr-178x150.png" srcset="https://static.openfoodfacts.org/images/misc/openfoodfacts-logo-fr-356x300.png 2x" width="178" height="150" alt="Open Food Facts" style="margin-bottom:0.5rem"/></a>
+</div>
+
+<p>Open Food Facts répertorie les produits alimentaires du monde entier.</p>
+
+
+			<form action="/cgi/search.pl" class="hide-for-large-up">
+			<div class="row collapse">
+
+					<div class="small-9 columns">
+						<input type="text" placeholder="Chercher un produit" name="search_terms">
+						<input name="search_simple" value="1" type="hidden" />
+						<input name="action" value="process" type="hidden" />
+					</div>
+					<div class="small-2 columns">
+						 <button type="submit" class="button postfix"><i class="fi-magnifying-glass"></i></button>
+					</div>
+					
+					<div class="small-1 columns">
+						<label class="right inline">
+							<a href="/cgi/search.pl" title="Recherche avancée"><i class="fi-plus"></i></a>
+						</label>
+					</div>
+			
+
+			</div>
+			</form>		
+
+
+
+<div class="block">
+<h3 class="block_title">Ajouter un produit</h3>
+<div class="block_content">
+<form method="post" action="/cgi/product.pl" enctype="multipart/form-data"><div id="imgsearchdiv_block_side">
+
+<a href="#" class="button small expand" id="imgsearchbutton_block_side"><i class="fi-camera"></i> Photo avec code-barre
+<input type="file" accept="image/*" capture="camera" class="img_input" name="imgupload_search" id="imgupload_search_block_side" style="position: absolute;
+    right:0;
+    bottom:0;
+    top:0;
+    cursor:pointer;
+    opacity:0;
+    font-size:40px;"/>
+</a>
+</div>
+
+<div id="progressbar_block_side" class="progress" style="display:none">
+  <span id="progressmeter_block_side" class="meter" style="width:0%"></span>
+</div>
+
+<div id="imgsearchmsg_block_side" data-alert class="alert-box info" style="display:none">
+  Image en cours d'envoi
+  <a href="#" class="close">&times;</a>
+</div>
+
+<div id="imgsearcherror_block_side" data-alert class="alert-box alert" style="display:none">
+  Erreur lors de l'envoi
+  <a href="#" class="close">&times;</a>
+</div>
+
+
+      <div class="row collapse">	  
+        <div class="small-9 columns">
+          <input type="text" name="code" placeholder="ou Code barre">
+        </div>
+        <div class="small-3 columns">
+           <input type="submit" value="Ajouter" class="button postfix" />
+        </div>
+      </div>
+	  
+	  <input type="submit" value="Produit sans code barre" class="button tiny" />
+</form>
+
+</div>
+</div>
+
+<div class="block">
+<h3 class="block_title">Se connecter</h3>
+<div class="block_content">
+<p>Connectez-vous pour ajouter des produits ou modifier leurs fiches.</p>
+
+<form method="post" action="/cgi/session.pl">
+<div class="row">
+<div class="small-12 columns">
+	<label>Nom d'utilisateur ou adresse e-mail :
+		<input type="text" name="user_id" autocomplete="username" />
+	</label>
+</div>
+<div class="small-12 columns">
+	<label>Mot de passe
+		<input type="password" name="password" autocomplete="current-password" />
+	</label>
+</div>
+<div class="small-12 columns">
+	<label>
+		<input type="checkbox" name="remember_me" value="on" />
+		Se souvenir de moi
+	</label>
+</div>
+</div>
+<input type="submit" name=".submit" value="Se connecter" class="button small" />
+</form>
+<p>Pas encore inscrit(e) ?
+<a href="/cgi/user.pl">Créez votre compte.</a></p>
+
+
+</div>
+</div>
+
+<div class="block">
+<h3 class="block_title">Partez en mission</h3>
+<div class="block_content">
+<a href="http://fr.openfoodfacts.org/mission/releveur-d-empreintes">
+<img src="https://static.openfoodfacts.org/images/misc/mission-releveur-d-empreintes.png" width="265" height="222" />
+</a>
+<p>Contribuez à Open Food Facts en ajoutant des produits et gagnez
+des étoiles en remplissant <a href="/missions">les missions</a> !</p>
+
+</div>
+</div>
+
+	
+		</div> <!-- sidebar -->
+	</div> <!-- left column -->
+		
+	
+	<div id="main_column" class="xxlarge-11 xlarge-10 large-9 medium-8 columns" style="padding-top:1rem" data-equalizer-watch>
+
+<!-- main column content - comment used to remove left column and center content on some pages -->  
+	
+
+
+<div class="share_button right" style="float:right;margin-top:-10px;display:none;">
+<a href="/produit/3017620429484/nutella-ferrero" class="button small icon" title="Nutella - ferrero - 825 g">
+	<i class="fi-share"></i>
+	<span class="show-for-large-up"> Partager</span>
+</a></div>
+<div class="edit_button right" style="float:right;margin-top:-10px;">
+<a href="/cgi/product.pl?type=edit&code=3017620429484" class="button small icon">
+	<i class="fi-pencil"></i>
+	<span class="show-for-large-up"> Modifier la fiche</span>
+</a></div>
+<div itemscope itemtype="http://schema.org/Product">
+<h1 property="food:name" itemprop="name">Nutella - ferrero - 825 g</h1><p>Code barre : <span property="food:code" itemprop="gtin13">3017620429484</span> (EAN / EAN-13)</p>
+<div property="gr:hasEAN_UCC-13" content="3017620429484" datatype="xsd:string"></div>
+<h2>Caractéristiques du produit</h2>
+<div class="row">
+<div class="hide-for-large-up medium-12 columns"><div class="image_box" itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+<a data-reveal-id="drop_front_fr" class="th">
+<img id="og_image" class="hide-for-xlarge-up" src="https://static.openfoodfacts.org/images/products/301/762/042/9484/front_fr.8.200.jpg" srcset="https://static.openfoodfacts.org/images/products/301/762/042/9484/front_fr.8.400.jpg 2x" itemprop="image" width="113" height="200" alt="Nutella - Produit" itemprop="thumbnail" />
+<img class="show-for-xlarge-up" src="https://static.openfoodfacts.org/images/products/301/762/042/9484/front_fr.8.400.jpg"  width="225" height="400" alt="Nutella - Produit" itemprop="thumbnail" />
+
+</a>
+<div id="drop_front_fr" class="reveal-modal" data-reveal aria-labelledby="modalTitle_front_fr" aria-hidden="true" role="dialog" about="https://static.openfoodfacts.org/images/products/301/762/042/9484/front_fr.8.full.jpg" >
+<h2 id="modalTitle_front_fr"></h2>
+<img src="https://static.openfoodfacts.org/images/products/301/762/042/9484/front_fr.8.full.jpg" alt="Nutella - Produit" itemprop="contentUrl" />
+<a class="close-reveal-modal" aria-label="Close" href="#">&#215;</a>
+<meta itemprop="representativeOfPage" content="false"/>
+<meta itemprop="license" content="https://creativecommons.org/licenses/by-sa/3.0/"/>
+<meta itemprop="caption" content="Nutella - Produit"/>
+</div>
+
+</div>			
+</div>
+<div class="medium-12 large-8 xlarge-8 xxlarge-8 columns">
+<p><span class="field">Dénomination générique :</span> <span itemprop="description">Pâtes à tartiner aux noisettes et au cacao</span></p><p><span class="field">Quantité :</span> 825 g</p><p><span class="field">Conditionnement :</span> <a href="/conditionnement/bocal">Bocal</a>, <a href="/conditionnement/verre">Verre</a></p><p><span class="field">Marques :</span> <a itemprop="brand" href="/marque/ferrero">Ferrero</a>, <a itemprop="brand" href="/marque/nutella">Nutella</a></p><p><span class="field">Catégories :</span> <a href="/categorie/produits-a-tartiner" class="tag well_known">Produits à tartiner</a>, <a href="/categorie/petit-dejeuners" class="tag well_known">Petit-déjeuners</a>, <a href="/categorie/produits-a-tartiner-sucres" class="tag well_known">Produits à tartiner sucrés</a>, <a href="/categorie/pates-a-tartiner" class="tag well_known">Pâtes à tartiner</a>, <a href="/categorie/pates-a-tartiner-au-chocolat" class="tag well_known">Pâtes à tartiner au chocolat</a>, <a href="/categorie/pates-a-tartiner-aux-noisettes" class="tag well_known">Pâtes à tartiner aux noisettes</a>, <a href="/categorie/pates-a-tartiner-aux-noisettes-et-au-cacao" class="tag well_known">Pâtes à tartiner aux noisettes et au cacao</a></p><p><span class="field">Lien vers la page du produit sur le site officiel du fabricant :</span> <a href="http://www.ferrero.fr/nutella">http://www.ferrero.fr/nutella</a></p><p><span class="field">Magasins :</span> <a href="/magasin/intermarche">Intermarché</a></p><p><span class="field">Pays de vente :</span> <a href="/pays/algerie" class="tag well_known">Algérie</a>, <a href="/pays/belgique" class="tag well_known">Belgique</a>, <a href="/pays/canada" class="tag well_known">Canada</a>, <a href="/pays/france" class="tag well_known">France</a>, <a href="/pays/polynesie-francaise" class="tag well_known">Polynésie française</a>, <a href="/pays/allemagne" class="tag well_known">Allemagne</a>, <a href="/pays/irlande" class="tag well_known">Irlande</a>, <a href="/pays/italie" class="tag well_known">Italie</a>, <a href="/pays/liban" class="tag well_known">Liban</a>, <a href="/pays/luxembourg" class="tag well_known">Luxembourg</a>, <a href="/pays/mali" class="tag well_known">Mali</a>, <a href="/pays/martinique" class="tag well_known">Martinique</a>, <a href="/pays/maroc" class="tag well_known">Maroc</a>, <a href="/pays/pays-bas" class="tag well_known">Pays-Bas</a>, <a href="/pays/nouvelle-caledonie" class="tag well_known">Nouvelle-Calédonie</a>, <a href="/pays/portugal" class="tag well_known">Portugal</a>, <a href="/pays/la-reunion" class="tag well_known">La Réunion</a>, <a href="/pays/espagne" class="tag well_known">Espagne</a>, <a href="/pays/suisse" class="tag well_known">Suisse</a>, <a href="/pays/tunisie" class="tag well_known">Tunisie</a>, <a href="/pays/royaume-uni" class="tag well_known">Royaume-Uni</a>, <a href="/pays/etats-unis" class="tag well_known">États-Unis</a></p>
+</div>
+<div class="show-for-large-up large-4 xlarge-4 xxlarge-4 columns" style="padding-left:0"><div class="image_box" itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+<a data-reveal-id="drop_front_fr" class="th">
+<img id="og_image" class="hide-for-xlarge-up" src="https://static.openfoodfacts.org/images/products/301/762/042/9484/front_fr.8.200.jpg" srcset="https://static.openfoodfacts.org/images/products/301/762/042/9484/front_fr.8.400.jpg 2x" itemprop="image" width="113" height="200" alt="Nutella - Produit" itemprop="thumbnail" />
+<img class="show-for-xlarge-up" src="https://static.openfoodfacts.org/images/products/301/762/042/9484/front_fr.8.400.jpg"  width="225" height="400" alt="Nutella - Produit" itemprop="thumbnail" />
+
+</a>
+<div id="drop_front_fr" class="reveal-modal" data-reveal aria-labelledby="modalTitle_front_fr" aria-hidden="true" role="dialog" about="https://static.openfoodfacts.org/images/products/301/762/042/9484/front_fr.8.full.jpg" >
+<h2 id="modalTitle_front_fr"></h2>
+<img src="https://static.openfoodfacts.org/images/products/301/762/042/9484/front_fr.8.full.jpg" alt="Nutella - Produit" itemprop="contentUrl" />
+<a class="close-reveal-modal" aria-label="Close" href="#">&#215;</a>
+<meta itemprop="representativeOfPage" content="false"/>
+<meta itemprop="license" content="https://creativecommons.org/licenses/by-sa/3.0/"/>
+<meta itemprop="caption" content="Nutella - Produit"/>
+</div>
+
+</div>			
+</div>
+</div>
+<h2>Ingrédients</h2>
+<div class="row">
+<div class="hide-for-large-up medium-12 columns"><div class="image_box" itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+<a data-reveal-id="drop_ingredients_fr" class="th">
+<img class="hide-for-xlarge-up" src="https://static.openfoodfacts.org/images/products/301/762/042/9484/ingredients_fr.10.200.jpg" srcset="https://static.openfoodfacts.org/images/products/301/762/042/9484/ingredients_fr.10.400.jpg 2x" width="200" height="128" alt="Nutella - Ingrédients" itemprop="thumbnail" />
+<img class="show-for-xlarge-up" src="https://static.openfoodfacts.org/images/products/301/762/042/9484/ingredients_fr.10.400.jpg"  width="400" height="256" alt="Nutella - Ingrédients" itemprop="thumbnail" />
+
+</a>
+<div id="drop_ingredients_fr" class="reveal-modal" data-reveal aria-labelledby="modalTitle_ingredients_fr" aria-hidden="true" role="dialog" about="https://static.openfoodfacts.org/images/products/301/762/042/9484/ingredients_fr.10.full.jpg" >
+<h2 id="modalTitle_ingredients_fr"></h2>
+<img src="https://static.openfoodfacts.org/images/products/301/762/042/9484/ingredients_fr.10.full.jpg" alt="Nutella - Ingrédients" itemprop="contentUrl" />
+<a class="close-reveal-modal" aria-label="Close" href="#">&#215;</a>
+<meta itemprop="representativeOfPage" content="false"/>
+<meta itemprop="license" content="https://creativecommons.org/licenses/by-sa/3.0/"/>
+<meta itemprop="caption" content="Nutella - Ingrédients"/>
+</div>
+
+</div>			
+</div>
+<div class="medium-12 large-8 xlarge-8 xxlarge-8 columns">
+<p class="note">&rarr; Les ingrédients sont listés par ordre d'importance (quantité).</p><div><span class="field">Liste des ingrédients :</span> <span id="ingredients_list" property="food:ingredientListAsText">sucre, huile végétale, <span class="allergen">noisettes</span> 13 %, cacao maigre 7,4 %, <span class="allergen">lait</span> écrémé en poudre 6,6 %, <span class="allergen">lactosérum</span> en poudre, émulsifiants : lécithines (<span class="allergen">soja</span>), vanilline.<!-- 4 - lc fr --></span></div><p><span class="field">Substances ou produits provoquant des allergies ou intolérances :</span> <a href="/allergene/lait" class="tag well_known">Lait</a>, <a href="/allergene/fruits-a-coque" class="tag well_known">Fruits à coque</a>, <a href="/allergene/soja" class="tag well_known">Soja</a>, <a href="/allergene/lactoserum" class="tag user_defined">Lactosérum</a></p><br/><hr class="floatleft"><div><b>Additifs :</b><br /><ul style="display:block;float:left;"><li><a href="/additif/e322-lecithines" class="level_1" >E322 - Lécithines</a></li>
+</ul></div><br/><hr class="floatleft"><div><b>Ingrédients pouvant être issus de l'huile de palme :</b><br /><img src="https://static.openfoodfacts.org/images/lang/fr/ingredients_that_may_be_from_palm_oil/ingredients-that-may-be-from-palm-oil.90x90.png" width="90" height="90"/ style="display:inline"> 
+<ul style="display:block;float:left;"><li><a href="/ingredients-pouvant-etre-issus-de-l-huile-de-palme/huile-vegetale">Huile végétale</a></li>
+</ul></div></div>
+<div class="show-for-large-up large-4 xlarge-4 xxlarge-4 columns" style="padding-left:0"><div class="image_box" itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+<a data-reveal-id="drop_ingredients_fr" class="th">
+<img class="hide-for-xlarge-up" src="https://static.openfoodfacts.org/images/products/301/762/042/9484/ingredients_fr.10.200.jpg" srcset="https://static.openfoodfacts.org/images/products/301/762/042/9484/ingredients_fr.10.400.jpg 2x" width="200" height="128" alt="Nutella - Ingrédients" itemprop="thumbnail" />
+<img class="show-for-xlarge-up" src="https://static.openfoodfacts.org/images/products/301/762/042/9484/ingredients_fr.10.400.jpg"  width="400" height="256" alt="Nutella - Ingrédients" itemprop="thumbnail" />
+
+</a>
+<div id="drop_ingredients_fr" class="reveal-modal" data-reveal aria-labelledby="modalTitle_ingredients_fr" aria-hidden="true" role="dialog" about="https://static.openfoodfacts.org/images/products/301/762/042/9484/ingredients_fr.10.full.jpg" >
+<h2 id="modalTitle_ingredients_fr"></h2>
+<img src="https://static.openfoodfacts.org/images/products/301/762/042/9484/ingredients_fr.10.full.jpg" alt="Nutella - Ingrédients" itemprop="contentUrl" />
+<a class="close-reveal-modal" aria-label="Close" href="#">&#215;</a>
+<meta itemprop="representativeOfPage" content="false"/>
+<meta itemprop="license" content="https://creativecommons.org/licenses/by-sa/3.0/"/>
+<meta itemprop="caption" content="Nutella - Ingrédients"/>
+</div>
+
+</div>			
+</div>
+</div>
+<h2>Informations nutritionnelles</h2>
+<div class="row">
+<div class="hide-for-large-up medium-12 columns"><div class="image_box" itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+<a data-reveal-id="drop_nutrition_fr" class="th">
+<img class="hide-for-xlarge-up" src="https://static.openfoodfacts.org/images/products/301/762/042/9484/nutrition_fr.11.200.jpg" srcset="https://static.openfoodfacts.org/images/products/301/762/042/9484/nutrition_fr.11.400.jpg 2x" width="200" height="162" alt="Nutella - Informations nutritionnelles" itemprop="thumbnail" />
+<img class="show-for-xlarge-up" src="https://static.openfoodfacts.org/images/products/301/762/042/9484/nutrition_fr.11.400.jpg"  width="400" height="324" alt="Nutella - Informations nutritionnelles" itemprop="thumbnail" />
+
+</a>
+<div id="drop_nutrition_fr" class="reveal-modal" data-reveal aria-labelledby="modalTitle_nutrition_fr" aria-hidden="true" role="dialog" about="https://static.openfoodfacts.org/images/products/301/762/042/9484/nutrition_fr.11.full.jpg" >
+<h2 id="modalTitle_nutrition_fr"></h2>
+<img src="https://static.openfoodfacts.org/images/products/301/762/042/9484/nutrition_fr.11.full.jpg" alt="Nutella - Informations nutritionnelles" itemprop="contentUrl" />
+<a class="close-reveal-modal" aria-label="Close" href="#">&#215;</a>
+<meta itemprop="representativeOfPage" content="false"/>
+<meta itemprop="license" content="https://creativecommons.org/licenses/by-sa/3.0/"/>
+<meta itemprop="caption" content="Nutella - Informations nutritionnelles"/>
+</div>
+
+</div>			
+</div>
+<div class="medium-12 large-8 xlarge-8 xxlarge-8 columns">
+<div class="row">
+	<div class="small-12 xlarge-6 columns">
+		<h4>Note nutritionnelle de couleur NutriScore
+<a href="http://fr.openfoodfacts.org/score-nutritionnel-france" title="Mode de calcul de la note nutritionnelle de couleur">
+<i class="fi-info"></i></a>
+</h4>
+<img src="https://static.openfoodfacts.org/images/misc/nutriscore-e.svg" alt="Note nutritionnelle NutriScore : E" style="margin-bottom:1rem;max-width:100%" /><br/>
+
+
+	</div>
+	<div class="small-12 xlarge-6 columns">
+		<h4>Repères nutritionnels pour 100 g
+<a href="/reperes-nutritionnels" title="Repères nutritionnels pour 100 g"><i class="fi-info"></i></a>
+</h4>
+<img src="https://static.openfoodfacts.org/images/misc/high.svg" width="30" height="30" style="vertical-align:middle;margin-right:15px;margin-bottom:4px;" alt="quantité élevée" />31.6 g <b>Matières grasses / Lipides</b> en quantité élevée<br /><img src="https://static.openfoodfacts.org/images/misc/high.svg" width="30" height="30" style="vertical-align:middle;margin-right:15px;margin-bottom:4px;" alt="quantité élevée" />10.9 g <b>Acides gras saturés</b> en quantité élevée<br /><img src="https://static.openfoodfacts.org/images/misc/high.svg" width="30" height="30" style="vertical-align:middle;margin-right:15px;margin-bottom:4px;" alt="quantité élevée" />56.7 g <b>Sucres</b> en quantité élevée<br /><img src="https://static.openfoodfacts.org/images/misc/low.svg" width="30" height="30" style="vertical-align:middle;margin-right:15px;margin-bottom:4px;" alt="faible quantité" />0.094 g <b>Sel</b> en faible quantité<br />
+
+	</div>
+</div>	
+<p><span class="field">Taille d'une portion :</span> 15 g</p><hr class="floatleft">
+<p>Comparaison avec les valeurs moyennes des produits de même catégorie :</p><label style="display:inline;font-size:1rem;"><input type="checkbox" name="compare_0" value="on"  checked="checked" id="compare_0" class="show_comparison" /> Pâtes à tartiner aux noisettes et au cacao</label>		
+ <a href="/categorie/pates-a-tartiner-aux-noisettes-et-au-cacao">(139 produits)</a><br><label style="display:inline;font-size:1rem;"><input type="checkbox" name="compare_1" value="on"  id="compare_1" class="show_comparison" /> Pâtes à tartiner au chocolat</label>		
+ <a href="/categorie/pates-a-tartiner-au-chocolat">(176 produits)</a><br><label style="display:inline;font-size:1rem;"><input type="checkbox" name="compare_2" value="on"  id="compare_2" class="show_comparison" /> Pâtes à tartiner aux noisettes</label>		
+ <a href="/categorie/pates-a-tartiner-aux-noisettes">(177 produits)</a><br><label style="display:inline;font-size:1rem;"><input type="checkbox" name="compare_3" value="on"  id="compare_3" class="show_comparison" /> Pâtes à tartiner</label>		
+ <a href="/categorie/pates-a-tartiner">(291 produits)</a><br><label style="display:inline;font-size:1rem;"><input type="checkbox" name="compare_4" value="on"  id="compare_4" class="show_comparison" /> Produits à tartiner sucrés</label>		
+ <a href="/categorie/produits-a-tartiner-sucres">(1545 produits)</a><br><label style="display:inline;font-size:1rem;"><input type="checkbox" name="compare_5" value="on"  id="compare_5" class="show_comparison" /> Petit-déjeuners</label>		
+ <a href="/categorie/petit-dejeuners">(2951 produits)</a><br><label style="display:inline;font-size:1rem;"><input type="checkbox" name="compare_6" value="on"  id="compare_6" class="show_comparison" /> Produits à tartiner</label>		
+ <a href="/categorie/produits-a-tartiner">(3162 produits)</a><br><br />		
+<input type="radio" id="nutrition_data_compare_percent" value="compare_percent" name="nutrition_data_compare_type" checked />
+<label for="nutrition_data_compare_percent">Différence en %</label>
+<input type="radio" id="nutrition_data_compare_value" value="compare_value" name="nutrition_data_compare_type" />
+<label for="nutrition_data_compare_value">valeur pour 100 g/ 100 ml</label>
+
+<p class="note">&rarr; A noter : pour chaque nutriment, la moyenne n'est pas celle de tous les produits de la catégorie, mais des produits pour lesquels la quantité du nutriment est connue.</p><table id="nutrition_data_table" class="data_table">
+<thead class="nutriment_header">
+<tr><th>
+Composition nutritionnelle</th>
+<th class="nutriment_value">pour 100 g / 100 ml</th><th class="nutriment_value">par portion</th><th class="nutriment_value compare_0">Pâtes à tartiner aux noisettes et au cacao</th><th class="nutriment_value compare_1">Pâtes à tartiner au chocolat</th><th class="nutriment_value compare_2">Pâtes à tartiner aux noisettes</th><th class="nutriment_value compare_3">Pâtes à tartiner</th><th class="nutriment_value compare_4">Produits à tartiner sucrés</th><th class="nutriment_value compare_5">Petit-déjeuners</th><th class="nutriment_value compare_6">Produits à tartiner</th></tr>
+</thead>
+<tbody>
+<tr id="nutriment_energy_tr" class="nutriment_main">
+<td class="nutriment_label">Énergie</td>
+
+<td class="nutriment_value" property="food:energyPer100g" content="2273">2273 kj<br/>(543 kcal)</td><td class="nutriment_value">341 kj<br/>(82 kcal)</td><td class="nutriment_value compare_0"><span class="compare_percent">+1%</span><span class="compare_value" style="display:none">2260 kj<br/>(540 kcal)</span></td><td class="nutriment_value compare_1"><span class="compare_percent">+2%</span><span class="compare_value" style="display:none">2230 kj<br/>(533 kcal)</span></td><td class="nutriment_value compare_2"><span class="compare_percent">-0%</span><span class="compare_value" style="display:none">2280 kj<br/>(545 kcal)</span></td><td class="nutriment_value compare_3"><span class="compare_percent">+3%</span><span class="compare_value" style="display:none">2200 kj<br/>(526 kcal)</span></td><td class="nutriment_value compare_4"><span class="compare_percent">+75%</span><span class="compare_value" style="display:none">1300 kj<br/>(311 kcal)</span></td><td class="nutriment_value compare_5"><span class="compare_percent">-26%</span><span class="compare_value" style="display:none">3080 kj<br/>(736 kcal)</span></td><td class="nutriment_value compare_6"><span class="compare_percent">+46%</span><span class="compare_value" style="display:none">1560 kj<br/>(373 kcal)</span></td>
+</tr>
+<tr id="nutriment_fat_tr" class="nutriment_main">
+<td class="nutriment_label">Matières grasses / Lipides</td>
+
+<td class="nutriment_value" property="food:fatPer100g" content="31.6">31.6 g</td><td class="nutriment_value">4.74 g</td><td class="nutriment_value compare_0"><span class="compare_percent">-5%</span><span class="compare_value" style="display:none">33.2 g</span></td><td class="nutriment_value compare_1"><span class="compare_percent">-3%</span><span class="compare_value" style="display:none">32.6 g</span></td><td class="nutriment_value compare_2"><span class="compare_percent">-7%</span><span class="compare_value" style="display:none">33.8 g</span></td><td class="nutriment_value compare_3"><span class="compare_percent">-3%</span><span class="compare_value" style="display:none">32.6 g</span></td><td class="nutriment_value compare_4"><span class="compare_percent">+251%</span><span class="compare_value" style="display:none">9 g</span></td><td class="nutriment_value compare_5"><span class="compare_percent">+242%</span><span class="compare_value" style="display:none">9.25 g</span></td><td class="nutriment_value compare_6"><span class="compare_percent">+14%</span><span class="compare_value" style="display:none">27.7 g</span></td>
+</tr>
+<tr id="nutriment_saturated-fat_tr" class="nutriment_sub">
+<td class="nutriment_label">dont Acides gras saturés</td>
+
+<td class="nutriment_value" property="food:saturatedFatPer100g" content="10.9">10.9 g</td><td class="nutriment_value">1.64 g</td><td class="nutriment_value compare_0"><span class="compare_percent">+19%</span><span class="compare_value" style="display:none">9.13 g</span></td><td class="nutriment_value compare_1"><span class="compare_percent">+18%</span><span class="compare_value" style="display:none">9.24 g</span></td><td class="nutriment_value compare_2"><span class="compare_percent">+20%</span><span class="compare_value" style="display:none">9.05 g</span></td><td class="nutriment_value compare_3"><span class="compare_percent">+24%</span><span class="compare_value" style="display:none">8.76 g</span></td><td class="nutriment_value compare_4"><span class="compare_percent">+334%</span><span class="compare_value" style="display:none">2.51 g</span></td><td class="nutriment_value compare_5"><span class="compare_percent">+259%</span><span class="compare_value" style="display:none">3.04 g</span></td><td class="nutriment_value compare_6"><span class="compare_percent">-17%</span><span class="compare_value" style="display:none">13.2 g</span></td>
+</tr>
+<tr id="nutriment_carbohydrates_tr" class="nutriment_main">
+<td class="nutriment_label">Glucides</td>
+
+<td class="nutriment_value" property="food:carbohydratesPer100g" content="57.3">57.3 g</td><td class="nutriment_value">8.59 g</td><td class="nutriment_value compare_0"><span class="compare_percent">+9%</span><span class="compare_value" style="display:none">52.4 g</span></td><td class="nutriment_value compare_1"><span class="compare_percent">+10%</span><span class="compare_value" style="display:none">52 g</span></td><td class="nutriment_value compare_2"><span class="compare_percent">+11%</span><span class="compare_value" style="display:none">51.8 g</span></td><td class="nutriment_value compare_3"><span class="compare_percent">+15%</span><span class="compare_value" style="display:none">49.7 g</span></td><td class="nutriment_value compare_4"><span class="compare_percent">+7%</span><span class="compare_value" style="display:none">53.6 g</span></td><td class="nutriment_value compare_5"><span class="compare_percent">-6%</span><span class="compare_value" style="display:none">60.7 g</span></td><td class="nutriment_value compare_6"><span class="compare_percent">+120%</span><span class="compare_value" style="display:none">26.1 g</span></td>
+</tr>
+<tr id="nutriment_sugars_tr" class="nutriment_sub">
+<td class="nutriment_label">dont Sucres</td>
+
+<td class="nutriment_value" property="food:sugarsPer100g" content="56.7">56.7 g</td><td class="nutriment_value">8.51 g</td><td class="nutriment_value compare_0"><span class="compare_percent">+16%</span><span class="compare_value" style="display:none">48.8 g</span></td><td class="nutriment_value compare_1"><span class="compare_percent">+19%</span><span class="compare_value" style="display:none">47.8 g</span></td><td class="nutriment_value compare_2"><span class="compare_percent">+17%</span><span class="compare_value" style="display:none">48.4 g</span></td><td class="nutriment_value compare_3"><span class="compare_percent">+29%</span><span class="compare_value" style="display:none">43.9 g</span></td><td class="nutriment_value compare_4"><span class="compare_percent">+13%</span><span class="compare_value" style="display:none">50.4 g</span></td><td class="nutriment_value compare_5"><span class="compare_percent">+60%</span><span class="compare_value" style="display:none">35.5 g</span></td><td class="nutriment_value compare_6"><span class="compare_percent">+138%</span><span class="compare_value" style="display:none">23.8 g</span></td>
+</tr>
+<tr id="nutriment_fiber_tr" class="nutriment_main">
+<td class="nutriment_label">Fibres alimentaires</td>
+
+<td class="nutriment_value" property="food:fiberPer100g" content="3.4">3.4 g</td><td class="nutriment_value">0.51 g</td><td class="nutriment_value compare_0"><span class="compare_percent">-10%</span><span class="compare_value" style="display:none">3.79 g</span></td><td class="nutriment_value compare_1"><span class="compare_percent">-13%</span><span class="compare_value" style="display:none">3.93 g</span></td><td class="nutriment_value compare_2"><span class="compare_percent">-9%</span><span class="compare_value" style="display:none">3.73 g</span></td><td class="nutriment_value compare_3"><span class="compare_percent">-11%</span><span class="compare_value" style="display:none">3.83 g</span></td><td class="nutriment_value compare_4"><span class="compare_percent">+63%</span><span class="compare_value" style="display:none">2.08 g</span></td><td class="nutriment_value compare_5"><span class="compare_percent">-33%</span><span class="compare_value" style="display:none">5.11 g</span></td><td class="nutriment_value compare_6"><span class="compare_percent">+83%</span><span class="compare_value" style="display:none">1.86 g</span></td>
+</tr>
+<tr id="nutriment_proteins_tr" class="nutriment_main">
+<td class="nutriment_label">Protéines</td>
+
+<td class="nutriment_value" property="food:proteinsPer100g" content="6">6 g</td><td class="nutriment_value">0.9 g</td><td class="nutriment_value compare_0"><span class="compare_percent">-7%</span><span class="compare_value" style="display:none">6.46 g</span></td><td class="nutriment_value compare_1"><span class="compare_percent">-4%</span><span class="compare_value" style="display:none">6.27 g</span></td><td class="nutriment_value compare_2"><span class="compare_percent">-8%</span><span class="compare_value" style="display:none">6.53 g</span></td><td class="nutriment_value compare_3"><span class="compare_percent">-19%</span><span class="compare_value" style="display:none">7.37 g</span></td><td class="nutriment_value compare_4"><span class="compare_percent">+158%</span><span class="compare_value" style="display:none">2.33 g</span></td><td class="nutriment_value compare_5"><span class="compare_percent">+3%</span><span class="compare_value" style="display:none">5.85 g</span></td><td class="nutriment_value compare_6"><span class="compare_percent">+19%</span><span class="compare_value" style="display:none">5.03 g</span></td>
+</tr>
+<tr id="nutriment_salt_tr" class="nutriment_main">
+<td class="nutriment_label">Sel</td>
+
+<td class="nutriment_value" property="food:saltPer100g" content="0.09398">0.09398 g</td><td class="nutriment_value">0.0141 g</td><td class="nutriment_value compare_0"><span class="compare_percent">-17%</span><span class="compare_value" style="display:none">0.113 g</span></td><td class="nutriment_value compare_1"><span class="compare_percent">-27%</span><span class="compare_value" style="display:none">0.129 g</span></td><td class="nutriment_value compare_2"><span class="compare_percent">-18%</span><span class="compare_value" style="display:none">0.115 g</span></td><td class="nutriment_value compare_3"><span class="compare_percent">-55%</span><span class="compare_value" style="display:none">0.207 g</span></td><td class="nutriment_value compare_4"><span class="compare_percent">-40%</span><span class="compare_value" style="display:none">0.156 g</span></td><td class="nutriment_value compare_5"><span class="compare_percent">-74%</span><span class="compare_value" style="display:none">0.364 g</span></td><td class="nutriment_value compare_6"><span class="compare_percent">-87%</span><span class="compare_value" style="display:none">0.697 g</span></td>
+</tr>
+<tr id="nutriment_sodium_tr" class="nutriment_sub">
+<td class="nutriment_label">
+Sodium</td>
+<td class="nutriment_value" property="food:sodiumEquivalentPer100g" content="0.037">0.037 g</td><td class="nutriment_value" >0.00555 g</td><td class="nutriment_value compare_0"><span class="compare_percent">-17%</span><span class="compare_value" style="display:none">0.0445 g</span></td><td class="nutriment_value compare_1"><span class="compare_percent">-27%</span><span class="compare_value" style="display:none">0.0508 g</span></td><td class="nutriment_value compare_2"><span class="compare_percent">-18%</span><span class="compare_value" style="display:none">0.0453 g</span></td><td class="nutriment_value compare_3"><span class="compare_percent">-55%</span><span class="compare_value" style="display:none">0.0815 g</span></td><td class="nutriment_value compare_4"><span class="compare_percent">-40%</span><span class="compare_value" style="display:none">0.0614 g</span></td><td class="nutriment_value compare_5"><span class="compare_percent">-74%</span><span class="compare_value" style="display:none">0.143 g</span></td><td class="nutriment_value compare_6"><span class="compare_percent">-87%</span><span class="compare_value" style="display:none">0.274 g</span></td>
+</tr>			
+<tr id="nutriment_nutrition-score-fr_tr" class="nutriment_main">
+<td class="nutriment_label"><a href="/score-nutritionnel-experimental-france" title=" -- energy 6 + sat-fat 10 + fr-sat-fat-for-fats 5 + sugars 10 + sodium 0 - fruits 0% 0 - fiber 4 - proteins 3 -- fsa 22 -- fr 22">Score nutritionnel expérimental - France</a></td>
+
+<td class="nutriment_value" property="food:nutritionScoreFrPer100g" content="22">22 </td><td class="nutriment_value">?</td><td class="nutriment_value compare_0"><span class="compare_percent">+9%</span><span class="compare_value" style="display:none">20.2 </span></td><td class="nutriment_value compare_1"><span class="compare_percent">+8%</span><span class="compare_value" style="display:none">20.3 </span></td><td class="nutriment_value compare_2"><span class="compare_percent">+9%</span><span class="compare_value" style="display:none">20.1 </span></td><td class="nutriment_value compare_3"><span class="compare_percent">+13%</span><span class="compare_value" style="display:none">19.4 </span></td><td class="nutriment_value compare_4"><span class="compare_percent">+76%</span><span class="compare_value" style="display:none">12.5 </span></td><td class="nutriment_value compare_5"><span class="compare_percent">+118%</span><span class="compare_value" style="display:none">10.1 </span></td><td class="nutriment_value compare_6"><span class="compare_percent">+61%</span><span class="compare_value" style="display:none">13.7 </span></td>
+</tr>
+
+</tbody>	
+</table>
+</div>
+<div class="show-for-large-up large-4 xlarge-4 xxlarge-4 columns" style="padding-left:0"><div class="image_box" itemprop="image" itemscope itemtype="http://schema.org/ImageObject">
+<a data-reveal-id="drop_nutrition_fr" class="th">
+<img class="hide-for-xlarge-up" src="https://static.openfoodfacts.org/images/products/301/762/042/9484/nutrition_fr.11.200.jpg" srcset="https://static.openfoodfacts.org/images/products/301/762/042/9484/nutrition_fr.11.400.jpg 2x" width="200" height="162" alt="Nutella - Informations nutritionnelles" itemprop="thumbnail" />
+<img class="show-for-xlarge-up" src="https://static.openfoodfacts.org/images/products/301/762/042/9484/nutrition_fr.11.400.jpg"  width="400" height="324" alt="Nutella - Informations nutritionnelles" itemprop="thumbnail" />
+
+</a>
+<div id="drop_nutrition_fr" class="reveal-modal" data-reveal aria-labelledby="modalTitle_nutrition_fr" aria-hidden="true" role="dialog" about="https://static.openfoodfacts.org/images/products/301/762/042/9484/nutrition_fr.11.full.jpg" >
+<h2 id="modalTitle_nutrition_fr"></h2>
+<img src="https://static.openfoodfacts.org/images/products/301/762/042/9484/nutrition_fr.11.full.jpg" alt="Nutella - Informations nutritionnelles" itemprop="contentUrl" />
+<a class="close-reveal-modal" aria-label="Close" href="#">&#215;</a>
+<meta itemprop="representativeOfPage" content="false"/>
+<meta itemprop="license" content="https://creativecommons.org/licenses/by-sa/3.0/"/>
+<meta itemprop="caption" content="Nutella - Informations nutritionnelles"/>
+</div>
+
+</div>			
+</div>
+</div>
+
+	
+<p>Produit ajouté le <time datetime="2013-04-15T22:14:58">15 avril 2013 à 22:14:58 CEST</time> par <a href="/contributeur/openfoodfacts-contributors">openfoodfacts-contributors</a>.<br/>
+Dernière modification de la page produit le <time datetime="2017-03-13T19:35:44">13 mars 2017 à 19:35:44 CET</time> par <a href="/contributeur/openfoodfacts-contributors">openfoodfacts-contributors</a>.
+<br>
+Fiche produit également modifiée par <a href="/contributeur/aleene">aleene</a>, <a href="/contributeur/date-limite-app">date-limite-app</a>, <a href="/contributeur/nicolasleger">nicolasleger</a>, <a href="/contributeur/romgn">romgn</a>, <a href="/contributeur/scanbot">scanbot</a>, <a href="/contributeur/sebleouf">sebleouf</a>, <a href="/contributeur/stephane">stephane</a>, <a href="/contributeur/tacinte">tacinte</a>, <a href="/contributeur/tacite">tacite</a>, <a href="/contributeur/teolemon">teolemon</a>, <a href="/contributeur/traaf">traaf</a>, <a href="/contributeur/twoflower">twoflower</a>, <a href="/contributeur/zoneblockscommunity">zoneblockscommunity</a>.
+</p>
+	
+<div class="alert-box info">
+Si les informations sont incomplètes ou incorrectes, vous pouvez les complèter ou les corriger en modifiant cette fiche.
+</div>
+
+</div>
+
+<div class="edit_button right" style="float:right;margin-top:-10px;">
+<a href="/cgi/product.pl?type=edit&code=3017620429484" class="button small">
+	<i class="fi-pencil"></i>
+	Modifier la fiche
+</a></div>
+
+
+	</div> <!-- main content column -->
+</div> <!-- row -->
+
+	</div> <!-- inner wrap -->
+</div> <!-- off-content wrap -->
+
+
+<!-- footer -->
+
+<div id="footer" class="row full-width collapse" style="max-width: 100% !important;" data-equalizer>
+
+	<div class="small-12 medium-6 large-3 columns" style="border-top:10px solid #ff0000" data-equalizer-watch>
+		<h4>Open Food Facts</h4>
+		<p>Une base de données collaborative, libre et ouverte des produits alimentaires du monde entier.</p>
+		<ul>
+			<li><a href="/mentions-legales">Mentions légales</a></li>
+			<li><a href="/conditions-d-utilisation">Conditions d'utilisation</a></li>
+			<li><a href="/données">Données</a></li>
+		</ul>
+	</div>
+	
+	<div class="small-12 medium-6 large-3 columns" style="border-top:10px solid #ffcc00" data-equalizer-watch>
+		<h4>Installez l'app</h4>
+
+<div style="float:left;width:160px;height:70px;">
+<a href="https://itunes.apple.com/fr/app/open-food-facts/id588797948">
+<img src="https://static.openfoodfacts.org/images/misc/Available_on_the_App_Store_Badge_FR_135x40.png" alt="Disponible sur l'App Store" width="135" height="40" /></a>
+</div>
+
+<div style="float:left;width:160px;height:70px;">
+<a href="https://play.google.com/store/apps/details?id=org.openfoodfacts.scanner&hl=fr">
+<img src="https://static.openfoodfacts.org/images/misc/android-app-on-google-play-en_app_rgb_wo_135x47.png" alt="Disponible sur Google Play" width="135" height="47" />
+</a></div>
+
+<div style="float:left;width:160px;height:70px;">
+<a href="http://www.windowsphone.com/fr-fr/store/app/openfoodfacts/5d7cf939-cfd9-4ac0-86d7-91b946f4df34">
+<img src="https://static.openfoodfacts.org/images/misc/154x40_WP_Store_blk.png" alt="Windows Phone Store" width="154" height="40" />
+</a></div>
+
+<div style="float:left;width:160px;height:70px;">
+<a href="http://world.openfoodfacts.org/files/off.apk">
+<img src="https://static.openfoodfacts.org/images/misc/android-apk.112x40.png" alt="Android APK" />
+</a></div>
+		
+	</div>
+	
+	<div class="small-12 medium-6 large-3 columns" style="border-top:10px solid #00d400" data-equalizer-watch>
+		<h4>Découvrez le projet</h4>
+		<ul>
+			<li><a href="/qui-sommes-nous">Qui sommes nous ?</a></li>
+			<li><a href="/questions-frequentes">Questions fréquentes</a></li>
+			<li><a href="http://fr.blog.openfoodfacts.org">Le blog d'Open Food Facts</a></li>
+			<li><a href="/presse">Presse</a></li>
+			<li><a href="http://fr.wiki.openfoodfacts.org">Open Food Facts wiki (fr)</a></li>
+		</ul>
+	</div>
+	
+	<div class="small-12 medium-6 large-3 columns" style="border-top:10px solid #0066ff" data-equalizer-watch>
+		<h4>Rejoignez la communauté</h4>
+
+<div>
+<a href="/code-de-conduite">Code de conduite</a><br/><br/>
+
+Rejoignez-nous sur <a href="https://slack-ssl-openfoodfacts.herokuapp.com/">Slack</a>: <script async defer src="https://slack-ssl-openfoodfacts.herokuapp.com/slackin.js"></script>
+<br/>
+et le <a href="https://www.facebook.com/groups/356858984359591/">groupe Facebook des contributeurs</a>
+</div>
+
+<div>
+Suivez nous sur <a href="http://twitter.com/openfoodfactsfr">Twitter</a>,
+<a href="https://www.facebook.com/OpenFoodFacts.fr">Facebook</a> et
+<a href="https://plus.google.com/u/0/b/102622509148794386660/">Google+</a>
+
+
+<ul class="small-block-grid-3" id="sharebuttons">
+	<li>
+		<a href="https://twitter.com/share" class="twitter-share-button" data-lang="fr" data-via="OpenFoodFactsFr" data-url="https://fr.openfoodfacts.org" data-count="vertical">Tweeter</a>
+	</li>
+	<li><fb:like href="https://fr.openfoodfacts.org" layout="box_count"></fb:like></li>
+	<li><div class="g-plusone" data-size="tall" data-count="true" data-href="https://fr.openfoodfacts.org"></div></li>
+</ul>
+
+</div>
+	
+	</div>
+</div>
+
+
+
+<div id="fb-root"></div>
+
+    <script type="text/javascript">
+      window.fbAsyncInit = function() {
+        FB.init({appId: '219331381518041', status: true, cookie: true,
+                 xfbml: true});
+     };
+	 
+      (function() {
+        var e = document.createElement('script');
+        e.type = 'text/javascript';
+        e.src = document.location.protocol +
+          '//connect.facebook.net/fr_FR/all.js';
+        e.async = true;
+        document.getElementById('fb-root').appendChild(e);
+      }());
+	  
+
+    </script>	
+
+<script type="text/javascript">
+  window.___gcfg = {
+    lang: 'fr_FR'
+  };
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>	
+
+<script src="https://static.openfoodfacts.org/foundation/js/foundation.min.js"></script>
+<script src="https://static.openfoodfacts.org/foundation/js/vendor/jquery.cookie.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js" integrity="sha384-222hzbb8Z8ZKe6pzP18nTSltQM3PdcAwxWKzGOKOIF+Y3bROr5n9zdQ8yTRHgQkQ" crossorigin="anonymous"></script>
+
+<script src="https://static.openfoodfacts.org/js/jquery.iframe-transport.min.js"></script>
+<script src="https://static.openfoodfacts.org/js/jquery.fileupload.min.js"></script>	
+<script src="https://static.openfoodfacts.org/js/load-image.min.js"></script>
+<script src="https://static.openfoodfacts.org/js/canvas-to-blob.min.js"></script>
+<script src="https://static.openfoodfacts.org/js/jquery.fileupload-ip.min.js"></script>
+
+
+<script>
+	$(document).foundation(  { equalizer : {
+    // Specify if Equalizer should make elements equal height once they become stacked.
+    equalize_on_stack: true
+	},
+    accordion: {
+      callback : function (accordion) {
+        $(document).foundation('equalizer', 'reflow');
+      }
+    }	
+  });
+</script>
+
+<script>
+  'use strict';
+
+  function doWebShare(e) {
+    e.preventDefault();
+    if (!window.isSecureContext || navigator.share === undefined) {
+      console.error('Error: Unsupported feature: navigator.share');
+        return;
+      }
+
+      var title = this.title;
+      var url = this.href;
+      navigator.share({title: title, url: url})
+        .then(() => console.info('Successfully sent share'),
+              error => console.error('Error sharing: ' + error));
+  }
+
+  function onLoad() {
+    var buttons = document.getElementsByClassName('share_button');
+    var shareAvailable = window.isSecureContext && navigator.share !== undefined;
+    [].forEach.call(buttons, function(button) {
+      if (shareAvailable) {
+          button.style.display = 'block';
+          [].forEach.call(button.getElementsByTagName('a'), function(a) {
+            a.addEventListener('click', doWebShare);
+          });
+        } else {
+          button.style.display = 'none';
+        }
+    });
+  }
+
+  window.addEventListener('load', onLoad);
+</script>
+
+<script type="application/ld+json">
+{
+	"@context" : "http://schema.org",
+	"@type" : "WebSite",
+	"name" : "Open Food Facts",
+	"url" : "https://fr.openfoodfacts.org",
+	"potentialAction": {
+		"@type": "SearchAction",
+		"target": "https://fr.openfoodfacts.org/cgi/search.pl?search_terms=?{search_term_string}",
+		"query-input": "required name=search_term_string"
+	}	
+}
+</script>
+
+<script type="application/ld+json">
+{
+	"@context": "http://schema.org/",
+	"@type": "Organization",
+	"url": "https://fr.openfoodfacts.org",
+	"logo": "https://static.openfoodfacts.org/images/misc/openfoodfacts-logo-fr-178x150.png",
+	"name": "Open Food Facts",
+	"sameAs" : [ "https://www.facebook.com/OpenFoodFacts.fr", "https://twitter.com/OpenFoodFactsFr"] 
+}
+</script>
+
+</body>
+</html>

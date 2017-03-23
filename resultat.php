@@ -43,14 +43,15 @@ if(isset($_POST['mot']) && !empty($_POST['mot'])) {
         $raw = file_get_contents($match);
         $json = json_decode($raw);
     } else {
-        $url = "https://fr-en.openfoodfacts.org/category/'.$motRecherche.'.json";
+        $url = "https://fr-en.openfoodfacts.org/cgi/search.pl?search_terms='.$motRecherche.'&search_simple=1&json=1&page_size=1000";
         $raw = file_get_contents($url);
         file_put_contents($dir . '/' . $motRecherche . '.json', $raw);
         $json = json_decode($raw);
     }
     if(!empty($json->products)) {
         foreach($json->products as $msg) {
-            echo "<u>" . $msg->product_name ."</u> : ". $msg->quantity . " " . $msg->nutrition_grade_fr . "  " . $msg->quantity ."";
+
+            echo "<u>" . $msg->product_name ."</u> : ". $msg->quantity . "  " . $msg->nutriments->energy_value ."</a>";
             echo "<br />";
         }
     }else {

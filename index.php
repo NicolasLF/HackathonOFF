@@ -19,11 +19,15 @@
 </head>
 <body>
 
-<form action="resultat.php" method="post">
-    <label for="mot">Mot recherché</label>
-    <input type="text" name="mot" />
-    <input type="submit" name="recherche" value="Rechercher" />
+<form action="result.php" method="POST">
+    <label for="name">Votre produit :</label>
+    <input type="text" name="name" />
+    <br />
+    <label for="sport">Votre sport :</label>
+    <input type="text" name="sport" />
+    <input type="submit" name="search" value="Rechercher" />
 </form>
+
 
 </body>
 </html>

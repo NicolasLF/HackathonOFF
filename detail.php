@@ -19,36 +19,54 @@
 
 <?php
 
-//include_once 'connect.php';
-//
-//$db = mysqli_connect(SERVER, USER, PASS, DB);
-//mysqli_set_charset($db,"utf8");
-//
-//$req = "SELECT * FROM bddsports";
-//$res = mysqli_query($db, $req);
+require_once 'connect.php';
+$pdo = new PDO(DSN, USER, PASS);
+
+
 
 $id = $_GET["id"];
-
-echo $_GET['name'];
+$name = $_GET['name'];
+echo $name;
 echo "<br/>";
-echo "<img src=" . $_GET['img'] . ">";
+$image = $_GET['img'];
+echo "<img src=" . $image . ">";
 echo "<br/>";
-echo $_GET['quantity'];
+$quantity = $_GET['quantity'];
+echo $quantity;
 echo "<br/>";
-echo $_GET['grade'];
+$grade = $_GET['grade'];
+echo $grade;
 echo "<br/>";
-echo $_GET['energy'];
+$energy = $_GET['energy'];
+echo $energy;
 
 
 ?>
 
-    <form action="result.php" method="POST">
+    <form action="" method="POST">
         <div class="ui-widget">
-            <label for="sport">Votre sport :</label>
+            <label for="search-input">Votre sport :</label>
             <input type="text" name="sport" id="search-input" class="form-control"/>
         </div>
         <input type="submit" class="btn btn-default" name="search" value="Rechercher" />
     </form>
+
+<?php
+if (isset($_POST['sport'])) {
+    $sport = $_POST['sport'];
+
+    $req = $pdo->prepare('SELECT * FROM bddsports WHERE name= :sport');
+    $req->bindValue(':sport', $sport);
+    $req->execute();
+
+    $res = $req->fetch();
+    echo '<br /><p>Vous avez choisi : '. $sport .' qui vous fait perdre : '. $res['kcalh'] .' kcal/h !</p><br />';
+    $energyKcal = round(($energy/4.1868)*($quantity/100));
+    $sportHours = round($energyKcal/$res['kcalh']);
+    $sportMinutes = round(($energyKcal/$res['kcalh']-round($energyKcal/$res['kcalh']))*60);
+    echo '<p>Il faut donc que vous fassiez '. $sportHours .' heures et '. $sportMinutes .' minutes de sport !!<br />Il y a encore du taf !</p>';
+}
+?>
 </body>
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>

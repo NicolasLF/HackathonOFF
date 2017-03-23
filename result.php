@@ -25,7 +25,7 @@ if(isset($_POST['name']) && !empty($_POST['name'])) {
         $raw = file_get_contents($match);
         $json = json_decode($raw);
     } else {
-        $url = "https://fr-en.openfoodfacts.org/cgi/search.pl?search_terms='.$searchedName.'&search_simple=1&action=process&json=1&page_size=1000";
+        $url = "https://fr-en.openfoodfacts.org/cgi/search.pl?search_terms='.$searchedName.'&search_simple=1&action=process&json=1&page_size=50";
         $raw = file_get_contents($url);
         file_put_contents($dir . '/' . $searchedName . '.json', $raw);
         $json = json_decode($raw);

@@ -32,6 +32,26 @@ if(isset($_POST['name']) && !empty($_POST['name'])) {
 
     $dir = 'cache';
     $match = '';
+    $categories = '';
+    $brands = '';
+    $nutrition_grades = '';
+    $allergens = '';
+    $palm_oil = 'indifferent';
+
+    if (isset($_POST['brands']))
+    {
+        $brands = urlencode(cleanString($_POST['brands']));
+    }
+
+    if (isset($_POST['nutrition_grades']))
+    {
+        $nutrition_grades = urlencode(cleanString($_POST['nutrition_grades']));
+    }
+
+    if (isset($_POST['palm_oil']))
+    {
+        $palm_oil = urlencode(cleanString($_POST['palm_oil']));
+    }
 
     foreach (glob($dir . '/*.json') as $file) {
         if (basename($file, '.json') == $searchedName) {
@@ -44,7 +64,9 @@ if(isset($_POST['name']) && !empty($_POST['name'])) {
         $json = json_decode($raw);
     } else {
 
-        $url = 'https://fr-en.openfoodfacts.org/cgi/search.pl?search_terms='.$searchedName.'&search_simple=1&json=1&page_size=50';
+
+        $url = 'https://fr-en.openfoodfacts.org/cgi/search.pl?search_terms='.$searchedName.'&ingredients_from_palm_oil='.$palm_oil. '&brands='.$brands.'&nutrition_grades='.$nutrition_grades.'&search_simple=1&json=1&page_size=50';
+
         $raw = file_get_contents($url);
         file_put_contents($dir . '/' . $searchedName . '.json', $raw);
         $json = json_decode($raw);
@@ -52,9 +74,12 @@ if(isset($_POST['name']) && !empty($_POST['name'])) {
 
     if(!empty($json->products)) {
         foreach($json->products as $msg) {
-            echo "<a href='detail.php?id=" . $msg->code . "&name=" . $msg->product_name . "&quantity=" . $msg->quantity. "&grade=" . $msg->nutrition_grade_fr . "&energy=" . $msg->nutriments->energy_value . "&img=" . $msg->image_small_url . "'>" .  $msg->product_name . "</a>";
+            echo "<a href='detail.php?id=" . $msg->code . "'>" .  $msg->product_name . "</a>";
             echo "<br />";
             echo "<img src=" . $msg->image_small_url . ">";
+            echo "<br />";
+            echo $msg->brands;
+            echo "<br />";
             echo "<br />";
         }
     }else {

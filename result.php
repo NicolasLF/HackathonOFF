@@ -45,7 +45,6 @@ if(isset($_POST['name']) && !empty($_POST['name'])) {
     } else {
 
         $url = 'https://fr-en.openfoodfacts.org/cgi/search.pl?search_terms='.$searchedName.'&search_simple=1&json=1&page_size=50';
-
         $raw = file_get_contents($url);
         file_put_contents($dir . '/' . $searchedName . '.json', $raw);
         $json = json_decode($raw);
@@ -56,7 +55,6 @@ if(isset($_POST['name']) && !empty($_POST['name'])) {
             echo "<a href='detail.php?id=" . $msg->code . "&name=" . $msg->product_name . "&quantity=" . $msg->quantity. "&grade=" . $msg->nutrition_grade_fr . "&energy=" . $msg->nutriments->energy_value . "&img=" . $msg->image_small_url . "'>" .  $msg->product_name . "</a>";
             echo "<br />";
             echo "<img src=" . $msg->image_small_url . ">";
-            echo "<br />";
             echo "<br />";
         }
     }else {

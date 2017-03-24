@@ -80,7 +80,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
             echo "<br/>";
             echo "<img src=" . $msg->image_small_url . ">";
             echo "<br/>";
-            echo $msg->brands;
+            echo $msg->brand;
             echo "<br/>";
             $quantity = $msg->quantity;
             echo $msg->quantity;

@@ -32,15 +32,13 @@ if(isset($_POST['name']) && !empty($_POST['name'])) {
 
     $dir = 'cache';
     $match = '';
-    $categories = '';
-    $brands = '';
+    $brand = '';
     $nutrition_grades = '';
-    $allergens = '';
-    $palm_oil = 'indifferent';
+    $palm_oil = '';
 
-    if (isset($_POST['brands']))
+    if (isset($_POST['brand']))
     {
-        $brands = urlencode(cleanString($_POST['brands']));
+        $brand = urlencode(cleanString($_POST['brand']));
     }
 
     if (isset($_POST['nutrition_grades']))
@@ -65,7 +63,7 @@ if(isset($_POST['name']) && !empty($_POST['name'])) {
     } else {
 
 
-        $url = 'https://fr-en.openfoodfacts.org/cgi/search.pl?search_terms='.$searchedName.'&ingredients_from_palm_oil='.$palm_oil. '&brands='.$brands.'&nutrition_grades='.$nutrition_grades.'&search_simple=1&json=1&page_size=50';
+        $url = 'https://fr-en.openfoodfacts.org/cgi/search.pl?search_terms='.$searchedName. '+' .$brand. '+palm_oil='.$palm_oil. '+nutrition_grades='.$nutrition_grades.'&search_simple=1&json=1&page_size=50';
 
         $raw = file_get_contents($url);
         file_put_contents($dir . '/' . $searchedName . '.json', $raw);
@@ -78,7 +76,7 @@ if(isset($_POST['name']) && !empty($_POST['name'])) {
             echo "<br />";
             echo "<img src=" . $msg->image_small_url . ">";
             echo "<br />";
-            echo $msg->brands;
+            echo $msg->brand;
             echo "<br />";
             echo "<br />";
         }

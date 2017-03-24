@@ -2,7 +2,8 @@
 
 // Vérification de la validité des informations
 // Hachage du mot de passe
-include 'connect.php';
+include '../connect.php';
+$bdd = new PDO(DSN, USER, PASS);
 
 if (isset($_POST['inscription'])){
 

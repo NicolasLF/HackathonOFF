@@ -9,7 +9,8 @@ session_start();
 //if (!isset($_SESSION['id'])){
 //    header('location: identification.php');
 //}
-include 'connect.php';
+include '../connect.php';
+$bdd = new PDO(DSN, USER, PASS);
 
 if (isset($_POST['selectaliment'])) {
     $req = $bdd->prepare('INSERT INTO food(date, product, nbkcal, id_user) VALUES(:date, :product, :nbkcal,:id_user)');
@@ -60,7 +61,7 @@ if (isset($_POST['selectaliment'])) {
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">
-                <!--                    <span>Hello --><? //= $_SESSION['firstname']; ?><!--</span>-->
+
             </a>
         </div>
         <a href="deconnexion.php" class="btn-primary pull-right">Log out</a>

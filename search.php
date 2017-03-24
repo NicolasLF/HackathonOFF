@@ -5,7 +5,7 @@
  * Date: 23/03/17
  * Time: 21:57
  */
-require_once 'membre/connect.php';
+require_once 'connect.php';
 $pdo = new PDO(DSN, USER, PASS);
 
 $term = $_GET['term'];

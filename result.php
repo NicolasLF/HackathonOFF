@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
     <link href="https://fonts.googleapis.com/css?family=Anton|Passion+One|Permanent+Marker|Sigmar+One" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Lato|PT+Sans+Narrow|PT+Serif|Varela+Round" rel="stylesheet">
 </head>
 
 <body>
@@ -33,15 +33,13 @@ if(isset($_POST['name']) && !empty($_POST['name'])) {
 
     $dir = 'cache';
     $match = '';
-    $categories = '';
-    $brands = '';
+    $brand = '';
     $nutrition_grades = '';
-    $allergens = '';
-    $palm_oil = 'indifferent';
+    $palm_oil = '';
 
-    if (isset($_POST['brands']))
+    if (isset($_POST['brand']))
     {
-        $brands = urlencode(cleanString($_POST['brands']));
+        $brand = urlencode(cleanString($_POST['brand']));
     }
 
     if (isset($_POST['nutrition_grades']))
@@ -66,7 +64,7 @@ if(isset($_POST['name']) && !empty($_POST['name'])) {
     } else {
 
 
-        $url = 'https://fr-en.openfoodfacts.org/cgi/search.pl?search_terms='.$searchedName.'&ingredients_from_palm_oil='.$palm_oil. '&brands='.$brands.'&nutrition_grades='.$nutrition_grades.'&search_simple=1&json=1&page_size=50';
+        $url = 'https://fr-en.openfoodfacts.org/cgi/search.pl?search_terms='.$searchedName. '+' .$brand. '&ingredients_from_palm_oil='.$palm_oil. '&nutrition_grades='.$nutrition_grades.'&search_simple=1&json=1&page_size=50';
 
         $raw = file_get_contents($url);
         file_put_contents($dir . '/' . $searchedName . '.json', $raw);
@@ -84,6 +82,7 @@ if(isset($_POST['name']) && !empty($_POST['name'])) {
 
     if(!empty($json->products)) {
         foreach($json->products as $msg) {
+
         if (!empty($msg->image_small_url)) {
 
             echo '<div class="col-xs-2"><a href="detail.php?id=' . $msg->code . '" class="thumbnail">' . $msg->product_name . '<br /><img src="' . $msg->image_small_url . '"><br />' . $msg->brands . '</a></div>';

@@ -12,6 +12,10 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato|Roboto:500i|Ubuntu+Condensed|Varela+Round"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato|PT+Sans+Narrow|PT+Serif|Varela+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Anton|Passion+One|Permanent+Marker|Sigmar+One" rel="stylesheet">
 
 </head>
@@ -28,11 +32,10 @@ require_once 'connect.php';
 $pdo = new PDO(DSN, USER, PASS);
 
 
-
-
 $id = $_GET["id"];
 
-function cleanString($string) {
+function cleanString($string)
+{
     // on supprime : majuscules ; / ? : @ & = + $ , . ! ~ * ( ) les espaces multiples et les underscore
     $string = strtolower($string);
     $string = preg_replace("/[^a-z0-9_'\s-]/", "", $string);
@@ -42,7 +45,7 @@ function cleanString($string) {
 }
 
 
-if(isset($_GET['id']) && !empty($_GET['id'])) {
+if (isset($_GET['id']) && !empty($_GET['id'])) {
 
     $dir = 'cache';
     $match = '';
@@ -58,19 +61,20 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
         $json = json_decode($raw);
     } else {
 
-        $url = 'https://fr-en.openfoodfacts.org/code/'.$id.'.json';
+        $url = 'https://fr-en.openfoodfacts.org/code/' . $id . '.json';
 
         $raw = file_get_contents($url);
         file_put_contents($dir . '/' . $id . '.json', $raw);
         $json = json_decode($raw);
     }
 
-    $quantity='';
-    $energy='';
+    $quantity = '';
+    $energy = '';
 
-    if(!empty($json->products)) {
-        foreach($json->products as $msg) {
-            echo '<h2 class="hidden-xs hidden-sm hidden-md">'. $msg->product_name .'</h2>
+    if (!empty($json->products)) {
+        foreach ($json->products as $msg) {
+
+            echo '<h2 class="hidden-xs hidden-sm hidden-md">' . $msg->product_name . '</h2>
             <div class="container">
             <div class="row">
             <div class="col-sm-5 cadre">';
@@ -79,17 +83,16 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
             <img src="' . $msg->image_small_url . '">';
 
             echo '
-<p>Marque : '. $msg->brands .'</p>';
-
+<p>Marque : ' . $msg->brands . '</p>';
 
 
             if (!empty($msg->quantity)) {
 
                 if (strpbrk($msg->quantity, 'x')) {
 
-                $tab = explode('x', $msg->quantity);
-                $quantity = $tab[0] * $tab[1];
-            } else {
+                    $tab = explode('x', $msg->quantity);
+                    $quantity = $tab[0] * $tab[1];
+                } else {
                     $quantity = $msg->quantity;
                 }
                 echo '
@@ -129,51 +132,50 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
 
                 echo '<p>soit ' . round(($msg->nutriments->energy_value * $quantity / 100) / 4.1868) . ' kcal au total</p>';
             }
-           echo '</div>';
+            echo '</div>';
 
         }
-    }else {
+    } else {
         echo "Rien n'a été trouvé.";
     }
-}else {
+} else {
     echo "Aucune recherche effectuée.";
 }
 
 ?>
 
 
-    <div class="col-sm-5 col-sm-offset-2 cadre">
-        <form action="" method="POST">
-            <div class="ui-widget choixsport">
-                <br />
-                <label for="search-input">Votre sport :</label>
-                <br />
-                <input type="text" name="sport" id="search-input" class="form-control"/>
-            </div>
-            <br />
-            <input type="submit" class="btn btn-default" name="search" value="Selectionner" />
-        </form>
+<div class="col-sm-5 col-sm-offset-2 cadre">
+    <form action="" method="POST">
+        <div class="ui-widget choixsport">
+            <br/>
+            <label for="search-input">Votre sport :</label>
+            <br/>
+            <input type="text" name="sport" id="search-input" class="form-control"/>
+        </div>
+        <br/>
+        <input type="submit" class="btn btn-default" name="search" value="Selectionner"/>
+    </form>
 
 
-<?php
-if (isset($_POST['sport'])) {
-    $sport = $_POST['sport'];
+    <?php
+    if (isset($_POST['sport'])) {
+        $sport = $_POST['sport'];
 
-    $req = $pdo->prepare('SELECT * FROM bddsports WHERE name= :sport');
-    $req->bindValue(':sport', $sport);
-    $req->execute();
+        $req = $pdo->prepare('SELECT * FROM bddsports WHERE name= :sport');
+        $req->bindValue(':sport', $sport);
+        $req->execute();
 
-    $res = $req->fetch();
-    echo '<br /><br /><br /><br /><p>Vous avez choisi : '. $sport .' qui vous fait perdre : '. $res['kcalh'] .' kcal/h !</p><br />';
-    $energyKcal = round(($energy/4.1868)*($quantity/100));
-    $sportHours = floor($energyKcal/$res['kcalh']);
-    $sportMinutes = round(($energyKcal/$res['kcalh']-floor($energyKcal/$res['kcalh']))*60);
-    echo '<p>Il faut donc que vous fassiez<br/>'. $sportHours .' heures et '. $sportMinutes .' minutes de sport !!<br />Il y a encore du taf !</p>';
-}
-?>
+        $res = $req->fetch();
+        echo '<br /><br /><br /><br /><p>Vous avez choisi : ' . $sport . ' qui vous fait perdre : ' . $res['kcalh'] . ' kcal/h !</p><br />';
+        $energyKcal = round(($energy / 4.1868) * ($quantity / 100));
+        $sportHours = floor($energyKcal / $res['kcalh']);
+        $sportMinutes = round(($energyKcal / $res['kcalh'] - floor($energyKcal / $res['kcalh'])) * 60);
+        echo '<p>Il faut donc que vous fassiez<br/>' . $sportHours . ' heures et ' . $sportMinutes . ' minutes de sport !!<br />Il y a encore du taf !</p>';
+    }
+    ?>
 </div>
 </div>
-
 </div>
 </body>
 

@@ -28,35 +28,45 @@
                             <label for="name">Rechercher un produit :</label>
                             <input type="text" name="name" class="form-control"/>
                         </div>
-                        <div id="collapseOne" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <div class="form-group">
-                                    <label for="brand">Marque</label>
-                                    <input type="text" name="brand" class="form-control"/>
+
+                        <div id="accordion" class="panel-group">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Recherche avancée</a>
+                                    </h4>
                                 </div>
-                                <div class="form-group">
-                                    <label for="nutrition_grades">Valeur nutritionnelle</label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="nutrition_grades" id="nutrition_grade_A" value="A"> A
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="nutrition_grades" id="nutrition_grade_B" value="B"> B
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="nutrition_grades" id="nutrition_grade_C" value="C"> C
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="nutrition_grades" id="nutrition_grade_D" value="D"> D
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="nutrition_grades" id="nutrition_grade_E" value="E"> E
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="without" name="palm_oil" >
-                                        Produit sans huile de palme
-                                    </label>
+                                <div id="collapseOne" class="panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <div class="form-group">
+                                            <label for="brand">Marque</label>
+                                            <input type="text" name="brand" class="form-control"/>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nutrition_grades">Valeur nutritionnelle</label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="nutrition_grades" id="nutrition_grade_A" value="A"> A
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="nutrition_grades" id="nutrition_grade_B" value="B"> B
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="nutrition_grades" id="nutrition_grade_C" value="C"> C
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="nutrition_grades" id="nutrition_grade_D" value="D"> D
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" name="nutrition_grades" id="nutrition_grade_E" value="E"> E
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" value="without" name="palm_oil" >
+                                                Produit sans huile de palme
+                                            </label>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

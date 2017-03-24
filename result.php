@@ -63,7 +63,7 @@ if(isset($_POST['name']) && !empty($_POST['name'])) {
     } else {
 
 
-        $url = 'https://fr-en.openfoodfacts.org/cgi/search.pl?search_terms='.$searchedName. '+' .$brand. '+ingredients_from_palm_oil='.$palm_oil. '+nutrition_grades='.$nutrition_grades.'&search_simple=1&json=1&page_size=50';
+        $url = 'https://fr-en.openfoodfacts.org/cgi/search.pl?search_terms='.$searchedName. '+' .$brand. '&ingredients_from_palm_oil='.$palm_oil. '&nutrition_grades='.$nutrition_grades.'&search_simple=1&json=1&page_size=50';
 
         $raw = file_get_contents($url);
         file_put_contents($dir . '/' . $searchedName . '.json', $raw);

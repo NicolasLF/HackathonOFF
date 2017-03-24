@@ -51,19 +51,33 @@ if (isset($_POST['sp'])) {
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+
+
     <link href="https://fonts.googleapis.com/css?family=Anton|Passion+One|Permanent+Marker|Sigmar+One" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato|PT+Sans+Narrow|PT+Serif|Varela+Round" rel="stylesheet">
+
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+
     <title>Eat N Run</title>
+
     <style>
         body{
             background-color: white;
         }
         #gauge2 > svg > text > tspan {
             display: none !important;
+        }
+        .modal-lg {
+            width: 80%!important;
+        }
+        .ct-label{
+            font-size: 14px;
         }
     </style>
 </head>
@@ -281,7 +295,127 @@ if (isset($_POST['sp'])) {
         </div>
     </div>
 </div>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Large modal</button>
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title" id="myModalLabel">Stats de la semaine</h2>
+            </div>
+            <div class="ct-chart ct-double-octave" id="chart1"></div>
+            <ul>
+                <li style="color:#F4C63D;">
+                    Calories brulées dans la semaine
+                </li>
+                <li style="color:#D70206;">
+                    Calories gagnées dans la semaine
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 
+
+<?php
+$date3 = date("Y-m-d");
+$req3 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = 1 AND date = '$date3'");
+$tt6 = '';
+while ($resultat3 = $req3->fetch()) {
+    $tt6 += $resultat3['nbkcal'];
+}
+$date3 = date("Y-m-d", strtotime('- 1 DAY'));
+$req3 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = 1 AND date = '$date3'");
+$tt = '';
+while ($resultat3 = $req3->fetch()) {
+    $tt += $resultat3['nbkcal'];
+}
+$date4 = date("Y-m-d", strtotime('- 2 DAY'));
+$req4 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = 1 AND date = '$date4'");
+$tt1 = '';
+while ($resultat4 = $req4->fetch()) {
+    $tt1 += $resultat4['nbkcal'];
+}
+$date5 = date("Y-m-d", strtotime('- 3 DAY'));
+$req5 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = 1 AND date = '$date5'");
+$tt2 = '';
+while ($resultat5 = $req5->fetch()) {
+    $tt2 += $resultat5['nbkcal'];
+}
+$date6 = date("Y-m-d", strtotime('- 4 DAY'));
+$req6 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = 1 AND date = '$date6'");
+$tt3 = '';
+while ($resultat6 = $req6->fetch()) {
+    $tt3 += $resultat6['nbkcal'];
+}
+$date7 = date("Y-m-d", strtotime('- 5 DAY'));
+$req7 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = 1 AND date = '$date7'");
+$tt4 = '';
+while ($resultat7 = $req7->fetch()) {
+    $tt4 += $resultat7['nbkcal'];
+}
+$date8 = date("Y-m-d", strtotime('- 6 DAY'));
+$req8 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = 1 AND date = '$date8'");
+$tt5 = '';
+while ($resultat8 = $req8->fetch()) {
+    $tt5 += $resultat8['nbkcal'];
+}
+
+
+$date3 = date("Y-m-d");
+$req3 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = 1 AND date = '$date3'");
+$aa6 = '';
+while ($resultat3 = $req3->fetch()) {
+    $aa6 += $resultat3['kcaltotal'];
+}
+$date3 = date("Y-m-d", strtotime('- 1 DAY'));
+$req3 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = 1 AND date = '$date3'");
+$aa = '';
+while ($resultat3 = $req3->fetch()) {
+    $aa += $resultat3['kcaltotal'];
+}
+$date4 = date("Y-m-d", strtotime('- 2 DAY'));
+$req4 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = 1 AND date = '$date4'");
+$aa1 = '';
+while ($resultat4 = $req4->fetch()) {
+    $aa1 += $resultat4['kcaltotal'];
+}
+$date5 = date("Y-m-d", strtotime('- 3 DAY'));
+$req5 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = 1 AND date = '$date5'");
+$aa2 = '';
+while ($resultat5 = $req5->fetch()) {
+    $aa2 += $resultat5['kcaltotal'];
+}
+$date6 = date("Y-m-d", strtotime('- 4 DAY'));
+$req6 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = 1 AND date = '$date6'");
+$aa3 = '';
+while ($resultat6 = $req6->fetch()) {
+    $aa3 += $resultat6['kcaltotal'];
+}
+$date7 = date("Y-m-d", strtotime('- 5 DAY'));
+$req7 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = 1 AND date = '$date7'");
+$aa4 = '';
+while ($resultat7 = $req7->fetch()) {
+    $aa4 += $resultat7['kcaltotal'];
+}
+$date8 = date("Y-m-d", strtotime('- 6 DAY'));
+$req8 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = 1 AND date = '$date8'");
+$aa5 = '';
+while ($resultat8 = $req8->fetch()) {
+    $aa5 += $resultat8['kcaltotal'];
+}
+?>
+<script>
+    // Initialize a Line chart in the container with the ID chart1
+    new Chartist.Line('#chart1', {
+        labels: ['Sam', 'Dim','Lun', 'Mar', 'Mer', 'Jeu', 'Ven'],
+        series: [
+            [parseInt('<?php echo $tt5;?>'), parseInt('<?php echo $tt4;?>'), parseInt('<?php echo $tt3;?>'), parseInt('<?php echo $tt2;?>'), parseInt('<?php echo $tt1;?>'), parseInt('<?php echo $tt;?>'), parseInt('<?php echo $tt6;?>')],
+                [],
+            [parseInt('<?php echo $aa5;?>'), parseInt('<?php echo $aa4;?>'), parseInt('<?php echo $aa3;?>'), parseInt('<?php echo $aa2;?>'), parseInt('<?php echo $aa1;?>'), parseInt('<?php echo $aa;?>'), parseInt('<?php echo $aa6;?>')],
+        ],
+    });
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
         integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"

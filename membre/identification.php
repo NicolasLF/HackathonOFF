@@ -2,7 +2,8 @@
 
 // Vérification de la validité des informations
 // Hachage du mot de passe
-include 'connect.php';
+include '../connect.php';
+$bdd = new PDO(DSN, USER, PASS);
 
 if (isset($_POST['inscription'])){
 
@@ -56,7 +57,7 @@ if (isset($_POST['connexion'])){
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <title>Document</title>
+    <title>Eat N Run</title>
 </head>
 <body>
 <div class="container">

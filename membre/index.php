@@ -9,7 +9,8 @@ session_start();
 //if (!isset($_SESSION['id'])){
 //    header('location: identification.php');
 //}
-include 'connect.php';
+include '../connect.php';
+$bdd = new PDO(DSN, USER, PASS);
 
 if (isset($_POST['selectaliment'])) {
     $req = $bdd->prepare('INSERT INTO food(date, product, nbkcal, id_user) VALUES(:date, :product, :nbkcal,:id_user)');
@@ -53,9 +54,12 @@ if (isset($_POST['sp'])) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
     <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
     <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
-    <title>Document</title>
+
+    <title>Eat N Run</title>
+
     <style>
         #gauge2 > svg > text > tspan {
             display: none !important;
@@ -73,7 +77,7 @@ if (isset($_POST['sp'])) {
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">
-                <!--                    <span>Hello --><? //= $_SESSION['firstname']; ?><!--</span>-->
+
             </a>
         </div>
         <a href="deconnexion.php" class="btn-primary pull-right">Log out</a>

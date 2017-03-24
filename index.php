@@ -73,6 +73,7 @@
                 </div>
                 <input type="submit" class="btn btn-default" name="search" value="Rechercher" />
             </form>
+            <a class="btn btn-default bouton" href="membre/index.php" role="button">Se connecter</a>
         </div>
 
 

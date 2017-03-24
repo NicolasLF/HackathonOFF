@@ -66,6 +66,9 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
         $json = json_decode($raw);
     }
 
+    $quantity='';
+    $energy='';
+
     if(!empty($json->products)) {
         foreach($json->products as $msg) {
 
@@ -78,40 +81,51 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
             <img src="' . $msg->image_small_url . '">';
 
             echo '
-<p>'. $msg->brands .'</p>';
+<p>Marque : '. $msg->brands .'</p>';
 
-            $quantity = $msg->quantity;
-            echo '
-<p>'. $msg->quantity .'</p>';
 
-            switch ($msg->nutrition_grade_fr) {
-                case 'a';
-            echo '
-<img src="img/nutriscore-a.svg" class="nutri">';
-            break;
-                case 'b';
-                    echo '
-<img src="img/nutriscore-b.svg" class="nutri">';
-                    break;
-                case 'c';
-                    echo '
-<img src="img/nutriscore-c.svg" class="nutri">';
-                    break;
-                case 'd';
-                    echo '
-<img src="img/nutriscore-d.svg" class="nutri">';
-                    break;
-                case 'e';
-                    echo '
-<img src="img/nutriscore-e.svg" class="nutri">';
-                    break;
+
+            if (!empty($msg->quantity)) {
+                $quantity = $msg->quantity;
+                echo '
+<p>Poids : ' . $msg->quantity . '</p>';
             }
-            $energy = $msg->nutriments->energy_value;
-            echo '
-<p>'. round($msg->nutriments->energy_value / 4.1868) . ' kcal pour 100g</p>';
 
-            echo '<p>'. round(($msg->nutriments->energy_value * $msg->quantity / 100) / 4.1868) . ' kcal</p>
-            </div>';
+            if (!empty($msg->nutrition_grade_fr)) {
+                switch ($msg->nutrition_grade_fr) {
+                    case 'a';
+                        echo '
+<img src="img/nutriscore-a.svg" class="nutri">';
+                        break;
+                    case 'b';
+                        echo '
+<img src="img/nutriscore-b.svg" class="nutri">';
+                        break;
+                    case 'c';
+                        echo '
+<img src="img/nutriscore-c.svg" class="nutri">';
+                        break;
+                    case 'd';
+                        echo '
+<img src="img/nutriscore-d.svg" class="nutri">';
+                        break;
+                    case 'e';
+                        echo '
+<img src="img/nutriscore-e.svg" class="nutri">';
+                        break;
+                }
+            }
+
+            if (!empty($msg->nutriments->energy_value)) {
+                $energy = $msg->nutriments->energy_value;
+                echo '
+<p>' . round($msg->nutriments->energy_value / 4.1868) . ' kcal pour 100g</p>';
+
+
+                echo '<p>soit ' . round(($msg->nutriments->energy_value * $msg->quantity / 100) / 4.1868) . ' kcal au total</p>';
+            }
+           echo '</div>';
+
         }
     }else {
         echo "Rien n'a été trouvé.";

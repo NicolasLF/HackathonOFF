@@ -16,14 +16,19 @@ h1 {
 
 h2 {
     margin-top: 0;
-    font-size: 40px;
+    font-size: 34px;
     color: white;
-    font-family: 'Anton';
-    text-shadow: 3px 3px 3px #666;
+    font-family: 'PT Sans Narrow', sans-serif;
     margin-bottom: 50px;
     padding: 15px;
     background-color: rgba(100,100,100,0.5);
+}
 
+h3 {
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 34px;
+    font-weight: bold;
+    color: black;
 }
 
 .prez {
@@ -68,7 +73,7 @@ p {
 }
 
 .cadre {
-    margin-top: 50px;
+    margin-top: 80px;
     border: 2px solid #999;
     padding: 25px;
     height: 600px;
@@ -84,4 +89,34 @@ p {
 .nutri {
     width: 100px;
     margin: 10px 0;
+}
+
+
+/*---- Membre authentifié   ----*/
+
+.row .chapeau {
+    background-color: white;
+}
+
+.member-box {
+    border: solid slategrey 1px;
+}
+
+.member-title-field {
+    font-size: 18px;
+}
+
+
+.datePicker {
+    text-align : left;
+}
+
+.listeProduit {
+    text-align: left;
+    padding-bottom: 0;
+}
+
+.listeProduit img {
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

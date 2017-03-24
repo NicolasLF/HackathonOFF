@@ -12,6 +12,9 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato|Roboto:500i|Ubuntu+Condensed|Varela+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato|PT+Sans+Narrow|PT+Serif|Varela+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Anton|Passion+One|Permanent+Marker|Sigmar+One" rel="stylesheet">
 
 </head>
@@ -21,6 +24,8 @@
 
 
 <?php
+
+session_start();
 
 require_once 'connect.php';
 $pdo = new PDO(DSN, USER, PASS);
@@ -68,10 +73,11 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
 
     if(!empty($json->products)) {
         foreach($json->products as $msg) {
-            echo '<h2>'. $msg->product_name .'</h2>
+
+            echo '<h2 class="hidden-xs hidden-sm hidden-md">'. $msg->product_name .'</h2>
             <div class="container">
             <div class="row">
-            <div class="col-xs-5 cadre">';
+            <div class="col-sm-5 cadre">';
 
             echo '
             <img src="' . $msg->image_small_url . '">';
@@ -82,7 +88,14 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
 
 
             if (!empty($msg->quantity)) {
-                $quantity = $msg->quantity;
+
+                if (strpbrk($msg->quantity, 'x')) {
+
+                $tab = explode('x', $msg->quantity);
+                $quantity = $tab[0] * $tab[1];
+            } else {
+                    $quantity = $msg->quantity;
+                }
                 echo '
 <p>Poids : ' . $msg->quantity . '</p>';
             }
@@ -118,7 +131,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
 <p>' . round($msg->nutriments->energy_value / 4.1868) . ' kcal pour 100g</p>';
 
 
-                echo '<p>soit ' . round(($msg->nutriments->energy_value * $msg->quantity / 100) / 4.1868) . ' kcal au total</p>';
+                echo '<p>soit ' . round(($msg->nutriments->energy_value * $quantity / 100) / 4.1868) . ' kcal au total</p>';
             }
            echo '</div>';
 
@@ -133,7 +146,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
 ?>
 
 
-    <div class="col-xs-5 col-xs-offset-2 cadre">
+    <div class="col-sm-5 col-sm-offset-2 cadre">
         <form action="" method="POST">
             <div class="ui-widget choixsport">
                 <br />
@@ -164,6 +177,12 @@ if (isset($_POST['sport'])) {
 ?>
 </div>
 </div>
+<?php
+
+    if (isset($_SESSION['id'])) {
+        echo '<a type="submit" href="membre/index.php" class="btn btn-default" name="record" value="Enregistrer mon repas">';
+    }
+?>
 </div>
 </body>
 

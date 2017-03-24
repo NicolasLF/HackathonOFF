@@ -25,13 +25,16 @@ DROP TABLE IF EXISTS `sports`;
 CREATE TABLE `sports` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_bddsports` int(11) NOT NULL,
-  `id_food` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `kcaltotal` int(11) NOT NULL,
+  `time` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `id_bddsports_idx` (`id_bddsports`),
-  KEY `id_food_idx` (`id_food`),
-  CONSTRAINT `id_bddsports` FOREIGN KEY (`id_bddsports`) REFERENCES `bddsports` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `id_food` FOREIGN KEY (`id_food`) REFERENCES `food` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `id_user_idx` (`id_user`),
+  CONSTRAINT `fk_id_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `id_bddsports` FOREIGN KEY (`id_bddsports`) REFERENCES `bddsports` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,6 +43,7 @@ CREATE TABLE `sports` (
 
 LOCK TABLES `sports` WRITE;
 /*!40000 ALTER TABLE `sports` DISABLE KEYS */;
+INSERT INTO `sports` VALUES (1,272,1,'2017-03-24',354,0),(2,296,1,'2017-03-24',1680,0),(3,301,1,'2017-03-24',528,0);
 /*!40000 ALTER TABLE `sports` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -52,4 +56,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-03-23 18:40:30
+-- Dump completed on 2017-03-24  9:24:37

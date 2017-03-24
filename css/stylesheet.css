@@ -1,6 +1,12 @@
 /*--- Formulaire Recherche avancée ---*/
 
-a:hover {
-    text-decoration: none;
+body {
+    text-align: center;
+    background: ;
 }
 
+
+
+a:focus, a:hover {
+    text-decoration: none;
+}

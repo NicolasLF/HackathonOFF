@@ -106,7 +106,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
             <label for="search-input">Votre sport :</label>
             <input type="text" name="sport" id="search-input" class="form-control"/>
         </div>
-        <input type="submit" class="btn btn-default" name="search" value="Rechercher" />
+        <input type="submit" class="btn btn-default" name="search" value="Selectionner" />
     </form>
 
 <?php

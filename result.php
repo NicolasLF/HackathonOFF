@@ -7,10 +7,11 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>EatnRun</title>
+    <title>Eat N Run</title>
 
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+    <link href="https://fonts.googleapis.com/css?family=Anton|Passion+One|Permanent+Marker|Sigmar+One" rel="stylesheet">
 
 </head>
 
@@ -71,16 +72,23 @@ if(isset($_POST['name']) && !empty($_POST['name'])) {
         file_put_contents($dir . '/' . $searchedName . '.json', $raw);
         $json = json_decode($raw);
     }
+?>
+<a href="index.php" class="logo">EAT N RUN</a>
+<h2>Liste des produits</h2>
+    <div class="container-fluid">
+
+        <div class="row">
+
+<?php
+
 
     if(!empty($json->products)) {
         foreach($json->products as $msg) {
-            echo "<a href='detail.php?id=" . $msg->code . "'>" .  $msg->product_name . "</a>";
-            echo "<br />";
-            echo "<img src=" . $msg->image_small_url . ">";
-            echo "<br />";
-            echo $msg->brands;
-            echo "<br />";
-            echo "<br />";
+        if (!empty($msg->image_small_url)) {
+
+            echo '<div class="col-xs-2"><a href="detail.php?id=' . $msg->code . '" class="thumbnail">' . $msg->product_name . '<br /><img src="' . $msg->image_small_url . '"><br />' . $msg->brands . '</a></div>';
+        }
+
         }
     }else {
         echo "Rien n'a été trouvé.";
@@ -91,7 +99,8 @@ if(isset($_POST['name']) && !empty($_POST['name'])) {
 
 
 ?>
-
+        </div>
+    </div>
 </body>
 
 </html>

@@ -26,20 +26,6 @@ $pdo = new PDO(DSN, USER, PASS);
 
 
 $id = $_GET["id"];
-//$name = $_GET['name'];
-//echo $name;
-//echo "<br/>";
-//$image = $_GET['img'];
-//echo "<img src=" . $image . ">";
-//echo "<br/>";
-//$quantity = $_GET['quantity'];
-//echo $quantity;
-//echo "<br/>";
-//$grade = $_GET['grade'];
-//echo $grade;
-//echo "<br/>";
-//$energy = $_GET['energy'];
-//echo $energy;
 
 function cleanString($string) {
     // on supprime : majuscules ; / ? : @ & = + $ , . ! ~ * ( ) les espaces multiples et les underscore
@@ -106,7 +92,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])) {
             <label for="search-input">Votre sport :</label>
             <input type="text" name="sport" id="search-input" class="form-control"/>
         </div>
-        <input type="submit" class="btn btn-default" name="search" value="Rechercher" />
+        <input type="submit" class="btn btn-default" name="search" value="Selectionner" />
     </form>
 
 <?php

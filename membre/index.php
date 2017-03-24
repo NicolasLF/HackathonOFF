@@ -6,14 +6,14 @@
  * Time: 18:17
  */
 session_start();
-//if (!isset($_SESSION['id'])){
-//   header('location: identification.php');
-//}
+if (!isset($_SESSION['id'])){
+   header('location: identification.php');
+}
 
 
 include 'connect.php';
 $bdd = new PDO(DSN, USER, PASS);
-$iduser = 1;
+$iduser = $_SESSION['id'];
 
 if (isset($_POST['selectaliment'])) {
     $req = $bdd->prepare('INSERT INTO food(date, product, nbkcal, id_user) VALUES(:date, :product, :nbkcal,:id_user)');
@@ -450,8 +450,12 @@ while ($resultat8 = $req8->fetch()) {
     });
 </script>
 <?php
-$totalcal = $kcaltotal / $daypoid;
-$_SESSION['toto'] = $totalcal;
+if ($kcaltotal != 0 && $kcaltotal != 0){
+    $totalcal = $kcaltotal / $daypoid;
+    $_SESSION['toto'] = $totalcal;
+}else{
+    $_SESSION['toto'] = 0;
+}
 
 ?>
 <script>

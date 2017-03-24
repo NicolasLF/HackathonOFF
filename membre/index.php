@@ -7,10 +7,13 @@
  */
 session_start();
 //if (!isset($_SESSION['id'])){
-//    header('location: identification.php');
+//   header('location: identification.php');
 //}
-include '../connect.php';
+
+
+include 'connect.php';
 $bdd = new PDO(DSN, USER, PASS);
+$iduser = 1;
 
 if (isset($_POST['selectaliment'])) {
     $req = $bdd->prepare('INSERT INTO food(date, product, nbkcal, id_user) VALUES(:date, :product, :nbkcal,:id_user)');
@@ -18,7 +21,7 @@ if (isset($_POST['selectaliment'])) {
         'date' => date("Y-m-d"),
         'product' => $_POST['id'],
         'nbkcal' => $_POST['calo'],
-        'id_user' => 1));
+        'id_user' => $iduser));
     header('location: index.php');
 }
 
@@ -35,7 +38,7 @@ if (isset($_POST['sp'])) {
     $req1 = $bdd->prepare('INSERT INTO sports(id_bddsports, id_user, date, kcaltotal, time) VALUES(:id_bddsports, :id_user, :date, :kcaltotal, :time)');
     $req1->execute(array(
         'id_bddsports' => $id,
-        'id_user' => 1,
+        'id_user' => $iduser,
         'date' => date("Y-m-d"),
         'kcaltotal' => $kcaltotal,
         'time' => $_POST['timesport']));
@@ -235,7 +238,7 @@ if (isset($_POST['sp'])) {
                 $date = $_POST['date'];
             }
             $daypoid = '';
-            $req = $bdd->query("SELECT * FROM food WHERE id_user = 1 AND date = date_format(str_to_date('$date','%m/%d/%Y'), '%Y-%m-%d');");
+            $req = $bdd->query("SELECT * FROM food WHERE id_user = $iduser AND date = date_format(str_to_date('$date','%m/%d/%Y'), '%Y-%m-%d');");
 
             while ($resultat = $req->fetch()) {
 
@@ -280,7 +283,7 @@ if (isset($_POST['sp'])) {
             <ul class="list-group">
                 <?php
                 $kcaltotal = '';
-                $req2 = $bdd->query("SELECT s.*,b.name, b.kcalh  FROM sports as s INNER JOIN bddsports as b ON s.id_bddsports = b.id WHERE id_user = 1 AND date = date_format(str_to_date('$date','%m/%d/%Y'), '%Y-%m-%d');");
+                $req2 = $bdd->query("SELECT s.*,b.name, b.kcalh  FROM sports as s INNER JOIN bddsports as b ON s.id_bddsports = b.id WHERE id_user = $iduser AND date = date_format(str_to_date('$date','%m/%d/%Y'), '%Y-%m-%d');");
 
                 while ($resultat2 = $req2->fetch()) {
                     $kcaltotal += $resultat2['kcaltotal'];
@@ -316,43 +319,43 @@ if (isset($_POST['sp'])) {
 
 <?php
 $date3 = date("Y-m-d");
-$req3 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = 1 AND date = '$date3'");
+$req3 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = $iduser AND date = '$date3'");
 $tt6 = '';
 while ($resultat3 = $req3->fetch()) {
     $tt6 += $resultat3['nbkcal'];
 }
 $date3 = date("Y-m-d", strtotime('- 1 DAY'));
-$req3 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = 1 AND date = '$date3'");
+$req3 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = $iduser AND date = '$date3'");
 $tt = '';
 while ($resultat3 = $req3->fetch()) {
     $tt += $resultat3['nbkcal'];
 }
 $date4 = date("Y-m-d", strtotime('- 2 DAY'));
-$req4 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = 1 AND date = '$date4'");
+$req4 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = $iduser AND date = '$date4'");
 $tt1 = '';
 while ($resultat4 = $req4->fetch()) {
     $tt1 += $resultat4['nbkcal'];
 }
 $date5 = date("Y-m-d", strtotime('- 3 DAY'));
-$req5 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = 1 AND date = '$date5'");
+$req5 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = $iduser AND date = '$date5'");
 $tt2 = '';
 while ($resultat5 = $req5->fetch()) {
     $tt2 += $resultat5['nbkcal'];
 }
 $date6 = date("Y-m-d", strtotime('- 4 DAY'));
-$req6 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = 1 AND date = '$date6'");
+$req6 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = $iduser AND date = '$date6'");
 $tt3 = '';
 while ($resultat6 = $req6->fetch()) {
     $tt3 += $resultat6['nbkcal'];
 }
 $date7 = date("Y-m-d", strtotime('- 5 DAY'));
-$req7 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = 1 AND date = '$date7'");
+$req7 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = $iduser AND date = '$date7'");
 $tt4 = '';
 while ($resultat7 = $req7->fetch()) {
     $tt4 += $resultat7['nbkcal'];
 }
 $date8 = date("Y-m-d", strtotime('- 6 DAY'));
-$req8 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = 1 AND date = '$date8'");
+$req8 = $bdd->query("SELECT nbkcal FROM food WHERE id_user = $iduser AND date = '$date8'");
 $tt5 = '';
 while ($resultat8 = $req8->fetch()) {
     $tt5 += $resultat8['nbkcal'];
@@ -360,43 +363,43 @@ while ($resultat8 = $req8->fetch()) {
 
 
 $date3 = date("Y-m-d");
-$req3 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = 1 AND date = '$date3'");
+$req3 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = $iduser AND date = '$date3'");
 $aa6 = '';
 while ($resultat3 = $req3->fetch()) {
     $aa6 += $resultat3['kcaltotal'];
 }
 $date3 = date("Y-m-d", strtotime('- 1 DAY'));
-$req3 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = 1 AND date = '$date3'");
+$req3 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = $iduser AND date = '$date3'");
 $aa = '';
 while ($resultat3 = $req3->fetch()) {
     $aa += $resultat3['kcaltotal'];
 }
 $date4 = date("Y-m-d", strtotime('- 2 DAY'));
-$req4 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = 1 AND date = '$date4'");
+$req4 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = $iduser AND date = '$date4'");
 $aa1 = '';
 while ($resultat4 = $req4->fetch()) {
     $aa1 += $resultat4['kcaltotal'];
 }
 $date5 = date("Y-m-d", strtotime('- 3 DAY'));
-$req5 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = 1 AND date = '$date5'");
+$req5 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = $iduser AND date = '$date5'");
 $aa2 = '';
 while ($resultat5 = $req5->fetch()) {
     $aa2 += $resultat5['kcaltotal'];
 }
 $date6 = date("Y-m-d", strtotime('- 4 DAY'));
-$req6 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = 1 AND date = '$date6'");
+$req6 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = $iduser AND date = '$date6'");
 $aa3 = '';
 while ($resultat6 = $req6->fetch()) {
     $aa3 += $resultat6['kcaltotal'];
 }
 $date7 = date("Y-m-d", strtotime('- 5 DAY'));
-$req7 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = 1 AND date = '$date7'");
+$req7 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = $iduser AND date = '$date7'");
 $aa4 = '';
 while ($resultat7 = $req7->fetch()) {
     $aa4 += $resultat7['kcaltotal'];
 }
 $date8 = date("Y-m-d", strtotime('- 6 DAY'));
-$req8 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = 1 AND date = '$date8'");
+$req8 = $bdd->query("SELECT kcaltotal FROM sports WHERE id_user = $iduser AND date = '$date8'");
 $aa5 = '';
 while ($resultat8 = $req8->fetch()) {
     $aa5 += $resultat8['kcaltotal'];

@@ -99,11 +99,6 @@ if (isset($_POST['connexion'])){
                     <label for="exampleInputPassword1">Password</label>
                     <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                 </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox"> Check me out
-                    </label>
-                </div>
                 <button type="submit" name="connexion" class="btn btn-default">Connexion</button>
             </form>
         </div>

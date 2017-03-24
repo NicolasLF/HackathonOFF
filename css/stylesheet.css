@@ -1,6 +1,53 @@
 /*--- Formulaire Recherche avancée ---*/
 
-a:hover {
-    text-decoration: none;
+body {
+    text-align: center;
+    background: rgb(204, 204, 255);
 }
 
+h1 {
+    font-size: 130px;
+    color: white;
+    font-weight: bold;
+    font-family: 'Passion One';
+    text-shadow: 4px 4px 4px #666;
+    margin-top: 150px;
+}
+
+h2 {
+    margin-top: 0;
+    font-size: 40px;
+    color: white;
+    font-family: 'Anton';
+    text-shadow: 3px 3px 3px #666;
+    margin-bottom: 50px;
+    padding: 15px;
+    background-color: rgba(100,100,100,0.5);
+
+}
+
+.logo {
+    margin-top: -3px;
+    float: left;
+    margin-left: 20px;
+    margin-right: -230px;
+    font-size: 60px;
+    color: white;
+    font-weight: bold;
+    font-family: 'Passion One';
+    text-shadow: 2px 2px 2px #666;
+
+}
+
+.thumbnail {
+    height: 380px;
+}
+
+img {
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+a:focus, a:hover {
+    text-decoration: none;
+}

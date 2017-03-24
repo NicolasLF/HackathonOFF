@@ -26,6 +26,10 @@ h2 {
 
 }
 
+.prez {
+    width: 350px;
+}
+
 .logo {
     margin-top: -3px;
     float: left;
@@ -39,6 +43,10 @@ h2 {
 
 }
 
+.bouton {
+    margin-top: 20px;
+}
+
 .thumbnail {
     height: 380px;
 }
@@ -50,4 +58,29 @@ img {
 
 a:focus, a:hover {
     text-decoration: none;
+}
+
+p {
+    font-size: 30px;
+    font-family: 'Anton';
+
+}
+
+.cadre {
+    margin-top: 50px;
+    border: 2px solid #999;
+    padding: 25px;
+    height: 600px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px #666;
+}
+
+.choixsport {
+    margin-top: 20px;
+}
+
+.nutri {
+    width: 100px;
+    margin: 10px 0;
 }

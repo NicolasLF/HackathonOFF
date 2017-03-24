@@ -9,7 +9,8 @@ session_start();
 //if (!isset($_SESSION['id'])){
 //    header('location: identification.php');
 //}
-include 'connect.php';
+include '../connect.php';
+$bdd = new PDO(DSN, USER, PASS);
 
 if (isset($_POST['selectaliment'])) {
     $req = $bdd->prepare('INSERT INTO food(date, product, nbkcal, id_user) VALUES(:date, :product, :nbkcal,:id_user)');
@@ -18,6 +19,28 @@ if (isset($_POST['selectaliment'])) {
         'product' => $_POST['id'],
         'nbkcal' => $_POST['calo'],
         'id_user' => 1));
+    header('location: index.php');
+}
+
+if (isset($_POST['sp'])) {
+    $sport = $_POST['sport'];
+    $req = $bdd->prepare('SELECT * FROM bddsports WHERE name= :sport');
+    $req->bindValue(':sport', $sport);
+    $req->execute();
+    $res = $req->fetch();
+
+    $kcaltotal = $_POST['timesport'] * $res['kcalh'];
+    $id = $res['id'];
+
+    $req1 = $bdd->prepare('INSERT INTO sports(id_bddsports, id_user, date, kcaltotal, time) VALUES(:id_bddsports, :id_user, :date, :kcaltotal, :time)');
+    $req1->execute(array(
+        'id_bddsports' => $id,
+        'id_user' => 1,
+        'date' => date("Y-m-d"),
+        'kcaltotal' => $kcaltotal,
+        'time' => $_POST['timesport']));
+    header('location: index.php');
+
 }
 ?>
 
@@ -31,26 +54,31 @@ if (isset($_POST['selectaliment'])) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <title>Document</title>
+    <title>Eat N Run</title>
+    <style>
+        #gauge2 > svg > text > tspan {
+            display: none !important;
+        }
+    </style>
 </head>
 <body>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">
-                <!--                    <span>Hello --><? //= $_SESSION['firstname']; ?><!--</span>-->
+
             </a>
         </div>
         <a href="deconnexion.php" class="btn-primary pull-right">Log out</a>
     </div>
 </nav>
 <div class="row">
-    <div class="col-xs-6">
+    <div class="col-md-5">
         <div class="col-xs-12 text-center">
         </div>
-        <div class="col-sm-offset-3 col-sm-6 text-center ">
-            <div id="gauge" class="text-center" style="width: 200px; height: 200px;"></div>
-            <h1>Calories consommé ce jour</h1>
+        <div class="col-sm-offset-1 col-sm-10 text-center ">
+            <div id="gauge" class="text-center" style="margin:0 auto; width: 300px; height: 150px;"></div>
+            <h1 style="margin-top: 0px;">Calories consommé ce jour</h1>
             <form class="form-horizontal" method="post">
                 <div class="form-group">
                     <label for="aliment" class="control-label">Qu'avez vous mangé?</label>
@@ -105,9 +133,12 @@ if (isset($_POST['selectaliment'])) {
                         if (!isset($msg->image_small_url)) {
                             $msg->image_small_url = '';
                         }
-                        $calo = round(($msg->nutriments->energy_value * $msg->quantity / 100) / 4.1868);
-                        echo '<div class="col-xs-10"><img style="width: 50px;height:50px;" src="' . $msg->image_small_url . '">' . $msg->product_name;
-                        echo "</div><div class='col-xs-2'><form method='post' class=\"pull-right\"><input type='hidden' name='calo' value=' $calo '><input type='hidden' name='id' value=' $msg->code '><button type=\"submit\" name=\"selectaliment\" class=\"btn btn-default\" data-toggle=\"modal\"data-target=\"#myModal\">Ajouter</button></form></div>";
+                        if (isset($msg->nutriments->energy_value) && isset($msg->quantity)) {
+                            $calo = round(($msg->nutriments->energy_value * $msg->quantity / 100) / 4.1868);
+                            echo '<div class="col-xs-10"><img style="width: 50px;height:50px;" src="' . $msg->image_small_url . '">' . $msg->product_name;
+                            echo "</div><div class='col-xs-2'><form method='post' class=\"pull-right\"><input type='hidden' name='calo' value=' $calo '><input type='hidden' name='id' value=' $msg->code '><button type=\"submit\" name=\"selectaliment\" class=\"btn btn-default\" data-toggle=\"modal\"data-target=\"#myModal\">Ajouter</button></form></div>";
+
+                        }
                     }
                 } else {
                     echo "Rien n'a été trouvé.";
@@ -117,23 +148,48 @@ if (isset($_POST['selectaliment'])) {
 
         </div>
     </div>
-    <div class="col-xs-6">
+    <div class="col-md-2">
+        <div id="gauge2" class="text-center" style="margin:0 auto; width: 300px; height: 150px;"></div>
+        <?php
+        if (isset($_SESSION['toto'])) {
+            if ($_SESSION['toto'] < 0.7) {
+                echo '<div class="text-center">
+            <img src="homer_sport.gif" alt="" style="height: 200px;"class="img-circle">
+        </div>';
+
+            } elseif ($_SESSION['toto'] > 1.3) {
+                echo '<div class="text-center">
+            <img src="bodybuilder.gif" alt="" style="height: 200px; width: 200px;"class="img-circle">
+        </div>';
+
+            } else {
+                echo '<div class="text-center">
+            <img src="applause.gif" alt="" style="height: 200px; width: 200px;"class="img-circle">
+        </div>';
+            }
+        }
+
+        ?>
+
+
+    </div>
+    <div class="col-md-5">
         <div class="col-xs-12 text-center">
-            <div class="col-sm-offset-3 col-sm-6 text-center ">
-                <div id="gauge1" class="text-center" style="width: 200px; height: 200px;"></div>
-                <h1>Calories perdu ce jour</h1>
-                <form class="form-horizontal" method="get">
-                    <div class="form-group">
-                        <label for="sport" class="control-label">Quel sport avez vous fait aujourd'hui?</label>
-                        <input type="text" class="form-control" id="sport" placeholder="Repas,aliments...">
+            <div class="col-sm-offset-1 col-sm-10 text-center ">
+                <div id="gauge1" class="text-center" style="margin:0 auto; width: 200px; height: 150px;"></div>
+                <h1 style="margin-top: 0px;">Calories perdu ce jour</h1>
+                <form class="form-horizontal" method="post">
+                    <div class="form-group ui-widget">
+                        <label for="search-input">Quel sport avez vous fait aujourd'hui?</label>
+                        <input type="text" name="sport" id="search-input" class="form-control"/>
                     </div>
                     <div class="form-group">
                         <label for="temps" class="control-label">Combien de temps?(en heure)</label>
-                        <input size="4" type="text" class="form-control" id="temps" placeholder="Qté">
+                        <input size="4" type="text" name="timesport" class="form-control" id="temps" placeholder="Qté">
                     </div>
                     <div class="form-group">
 
-                        <button type="submit" class="btn btn-default">Ajouter</button>
+                        <button type="submit" name="sp" class="btn btn-default">Ajouter</button>
                     </div>
                 </form>
             </div>
@@ -142,30 +198,87 @@ if (isset($_POST['selectaliment'])) {
     </div>
 </div>
 <div class="row">
-    <div class="col-xs-12">
-        <form class="form-inline" method="post">
-            <div class="form-group">
-                <p>Date: <input type="text" name="date" id="datepicker"></p>
-            </div>
-            <div class="form-group">
+    <div class="col-sm-6">
+        <div class="col-sm-offset-1 col-sm-10">
+            <form class="form-inline" method="post">
+                <div class="form-group">
+                    <?php if (isset($_POST['godate'])) {
+                        ?>
+                        <p>Date: <input type="text" name="date" id="datepicker" value="<?= $_POST['date']; ?>"></p>
+                        <?php
+                    } else { ?>
+                        <p>Date: <input type="text" name="date" id="datepicker" value="<?= date("m/d/Y"); ?>"></p>
+                        <?php
+                    }
+                    ?>
+                </div>
+                <div class="form-group">
 
-                <button type="submit" name="godate" class="btn btn-default">Let's go !</button>
-            </div>
-        </form>
+                    <button type="submit" name="godate" class="btn btn-default">Let's go !</button>
+                </div>
+            </form>
 
-        <?php
-        $date = date("m/d/Y");
-        if (isset($_POST['godate'])){
-            $date = $_POST['date'];
-        }
+            <?php
+            $date = date("m/d/Y");
+            if (isset($_POST['godate'])) {
+                $date = $_POST['date'];
+            }
+            $daypoid = '';
+            $req = $bdd->query("SELECT * FROM food WHERE id_user = 1 AND date = date_format(str_to_date('$date','%m/%d/%Y'), '%Y-%m-%d');");
 
-        $req = $bdd->query("SELECT * FROM food WHERE id_user = 1 AND date = date_format(str_to_date('$date','%m/%d/%Y'), '%Y-%m-%d');");
+            while ($resultat = $req->fetch()) {
 
-        while ($resultat = $req->fetch()) {
-            echo $resultat['product'];
-        }
+                if (isset($resultat['product']) && !empty($resultat['product'])) {
 
-        ?>
+                    $dir = '../cache';
+                    $match = '';
+
+                    foreach (glob($dir . '/*.json') as $file) {
+                        if (basename($file, '.json') == $resultat['product']) {
+                            $match = $file;
+                        }
+                    }
+
+                    if ($match != '' && (time() - filemtime($match) < 60000)) {
+                        $raw = file_get_contents($match);
+                        $json = json_decode($raw);
+                    } else {
+
+                        $url = 'https://fr-en.openfoodfacts.org/code/' . $resultat['product'] . '.json';
+
+                        $raw = file_get_contents($url);
+                        file_put_contents($dir . '/' . $resultat['product'] . '.json', $raw);
+                        $json = json_decode($raw);
+                    }
+
+                    if (!empty($json->products)) {
+                        foreach ($json->products as $msg) {
+                            if (!isset($msg->image_small_url)) {
+                                $msg->image_small_url = '';
+                            }
+                            echo '<img style="width: 50px;height:50px;" src="' . $msg->image_small_url . '">  ' . $msg->product_name . '</br>';
+                            $daypoid += round(($msg->nutriments->energy_value * $msg->quantity / 100) / 4.1868);
+                        }
+                    }
+                }
+            }?>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="col-sm-offset-1 col-sm-10">
+            <ul class="list-group">
+                <?php
+                $kcaltotal = '';
+                $req2 = $bdd->query("SELECT s.*,b.name, b.kcalh  FROM sports as s INNER JOIN bddsports as b ON s.id_bddsports = b.id WHERE id_user = 1 AND date = date_format(str_to_date('$date','%m/%d/%Y'), '%Y-%m-%d');");
+
+                while ($resultat2 = $req2->fetch()) {
+                    $kcaltotal += $resultat2['kcaltotal'];
+                    echo '<li class="list-group-item"><span class="badge">' . $resultat2['kcaltotal'] . '</span>Vous avez fait <strong>' . $resultat2['time'] . '</strong> heures de <strong>' . $resultat2['name'] . '</strong> et vous avez perdu :</li>';
+                }
+
+                ?>
+            </ul>
+        </div>
     </div>
 </div>
 
@@ -179,18 +292,37 @@ if (isset($_POST['selectaliment'])) {
 <script>
     var g = new JustGage({
         id: "gauge",
-        value: 7000,
+        value: parseInt('<?php echo $daypoid; ?>'),
         min: 0,
-        max: 8000,
-        title: "Visitors",
+        max: 2500,
+        title: "Calories consommé ce jour",
     });
 </script>
 <script>
     var g = new JustGage({
         id: "gauge1",
-        value: 3000,
+        value: parseInt('<?php echo $kcaltotal;?>'),
         min: 0,
-        max: 8000,
+        max: 4000,
+        title: "Calories perdu ce jour",
+        levelColors: [
+            "#ff0002",
+            "#ffbd00",
+            "#05ff00"
+        ]
+    });
+</script>
+<?php
+$totalcal = $kcaltotal / $daypoid;
+$_SESSION['toto'] = $totalcal;
+
+?>
+<script>
+    var g = new JustGage({
+        id: "gauge2",
+        value: <?php echo $totalcal;?>,
+        min: 0,
+        max: 2,
         title: "Visitors",
         levelColors: [
             "#ff0002",
@@ -201,6 +333,7 @@ if (isset($_POST['selectaliment'])) {
 </script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="../js/script.js"></script>
 <script>
     $(function () {
         $("#datepicker").datepicker();

@@ -20,7 +20,7 @@
 
         <div class="container">
             <h1>EAT N RUN</h1>
-            <img src="img/regime_transp2_rsz.png">
+            <img src="img/regime_transp2_rsz.png" class="prez">
             <form action="result.php" method="POST">
                 <div class="row">
                     <div class="col-xs-6 col-xs-offset-3">
@@ -74,6 +74,7 @@
                 </div>
                 <input type="submit" class="btn btn-default" name="search" value="Rechercher" />
             </form>
+            <a class="btn btn-default bouton" href="membre/index.php" role="button">Se connecter</a>
         </div>
 
 

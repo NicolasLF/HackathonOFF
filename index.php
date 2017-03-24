@@ -20,12 +20,13 @@
 
         <div class="container">
             <h1>EAT N RUN</h1>
+            <p style="color: #444; font-size: 28px">Gérez votre bien-être en quelques clics</p>
             <img src="img/regime_transp2_rsz.png" class="prez">
             <form action="result.php" method="POST">
                 <div class="row">
                     <div class="col-xs-6 col-xs-offset-3">
                         <div class="form-group">
-                            <label for="name">Rechercher un produit :</label>
+                            <label for="name">Rechercher un aliment :</label>
                             <input type="text" name="name" class="form-control"/>
                         </div>
 

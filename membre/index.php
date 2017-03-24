@@ -95,7 +95,7 @@ if (isset($_POST['sp'])) {
         </div>
         <div class="col-sm-offset-1 col-sm-10 text-center ">
             <div id="gauge" class="text-center" style="margin:0 auto; width: 300px; height: 150px;"></div>
-            <h3 style="margin-top: 0px;">Calories consommé ce jour</h3>
+            <h3 style="margin-top: 0px;">Calories consommées ce jour</h3>
             <form class="form-horizontal" method="post">
                 <div class="form-group">
                     <label for="aliment" class="control-label member-title-field">Qu'avez vous mangé?</label>
@@ -195,10 +195,10 @@ if (isset($_POST['sp'])) {
         <div class="col-xs-12 text-center">
             <div class="col-sm-offset-1 col-sm-10 text-center ">
                 <div id="gauge1" class="text-center" style="margin:0 auto; width: 200px; height: 150px;"></div>
-                <h3 style="margin-top: 0px;">Calories perdu ce jour</h3>
+                <h3 style="margin-top: 0px;">Calories perdues ce jour</h3>
                 <form class="form-horizontal" method="post">
                     <div class="form-group ui-widget">
-                        <label for="search-input" class="member-title-field">Quel sport avez vous fait aujourd'hui?</label>
+                        <label for="search-input" class="member-title-field">Quel sport avez vous pratiqué aujourd'hui?</label>
                         <input type="text" name="sport" id="search-input" class="form-control"/>
                     </div>
                     <div class="form-group">
@@ -433,7 +433,7 @@ while ($resultat8 = $req8->fetch()) {
         value: parseInt('<?php echo $daypoid; ?>'),
         min: 0,
         max: 2500,
-        title: "Calories consommé ce jour",
+        title: "Calories consommées ce jour",
     });
 </script>
 <script>
@@ -442,7 +442,7 @@ while ($resultat8 = $req8->fetch()) {
         value: parseInt('<?php echo $kcaltotal;?>'),
         min: 0,
         max: 4000,
-        title: "Calories perdu ce jour",
+        title: "Calories perdues ce jour",
         levelColors: [
             "#ff0002",
             "#ffbd00",

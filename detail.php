@@ -12,6 +12,8 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Lato|Roboto:500i|Ubuntu+Condensed|Varela+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato|PT+Sans+Narrow|PT+Serif|Varela+Round" rel="stylesheet">
 
 </head>
 

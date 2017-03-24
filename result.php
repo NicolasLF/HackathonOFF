@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
     <link href="https://fonts.googleapis.com/css?family=Anton|Passion+One|Permanent+Marker|Sigmar+One" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Lato|PT+Sans+Narrow|PT+Serif|Varela+Round" rel="stylesheet">
 </head>
 
 <body>

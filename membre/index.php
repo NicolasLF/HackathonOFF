@@ -54,34 +54,34 @@ if (isset($_POST['sp'])) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="../css/stylesheet.css">
+    <link href="https://fonts.googleapis.com/css?family=Anton|Passion+One|Permanent+Marker|Sigmar+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato|PT+Sans+Narrow|PT+Serif|Varela+Round" rel="stylesheet">
     <title>Eat N Run</title>
     <style>
+        body{
+            background-color: white;
+        }
         #gauge2 > svg > text > tspan {
             display: none !important;
         }
     </style>
 </head>
 <body>
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">
 
-            </a>
-        </div>
-        <a href="deconnexion.php" class="btn-primary pull-right">Log out</a>
-    </div>
-</nav>
-<div class="row">
+<a href="../index.php" class="logo">EAT N RUN</a>
+<h2>Liste des produits</h2>
+
+<div class="row chapeau">
     <div class="col-md-5">
         <div class="col-xs-12 text-center">
         </div>
         <div class="col-sm-offset-1 col-sm-10 text-center ">
             <div id="gauge" class="text-center" style="margin:0 auto; width: 300px; height: 150px;"></div>
-            <h1 style="margin-top: 0px;">Calories consommé ce jour</h1>
+            <h3 style="margin-top: 0px;">Calories consommé ce jour</h3>
             <form class="form-horizontal" method="post">
                 <div class="form-group">
-                    <label for="aliment" class="control-label">Qu'avez vous mangé?</label>
+                    <label for="aliment" class="control-label member-title-field">Qu'avez vous mangé?</label>
                     <input type="text" class="form-control" name="aliment" id="aliment" placeholder="Repas,aliments...">
                 </div>
                 <div class="form-group">
@@ -135,7 +135,7 @@ if (isset($_POST['sp'])) {
                         }
                         if (isset($msg->nutriments->energy_value) && isset($msg->quantity)) {
                             $calo = round(($msg->nutriments->energy_value * $msg->quantity / 100) / 4.1868);
-                            echo '<div class="col-xs-10"><img style="width: 50px;height:50px;" src="' . $msg->image_small_url . '">' . $msg->product_name;
+                            echo '<div class="col-xs-10 listeProduit"><img style="width: 50px;height:50px;" src="' . $msg->image_small_url . '">' . $msg->product_name;
                             echo "</div><div class='col-xs-2'><form method='post' class=\"pull-right\"><input type='hidden' name='calo' value=' $calo '><input type='hidden' name='id' value=' $msg->code '><button type=\"submit\" name=\"selectaliment\" class=\"btn btn-default\" data-toggle=\"modal\"data-target=\"#myModal\">Ajouter</button></form></div>";
 
                         }
@@ -177,14 +177,14 @@ if (isset($_POST['sp'])) {
         <div class="col-xs-12 text-center">
             <div class="col-sm-offset-1 col-sm-10 text-center ">
                 <div id="gauge1" class="text-center" style="margin:0 auto; width: 200px; height: 150px;"></div>
-                <h1 style="margin-top: 0px;">Calories perdu ce jour</h1>
+                <h3 style="margin-top: 0px;">Calories perdu ce jour</h3>
                 <form class="form-horizontal" method="post">
                     <div class="form-group ui-widget">
-                        <label for="search-input">Quel sport avez vous fait aujourd'hui?</label>
+                        <label for="search-input" class="member-title-field">Quel sport avez vous fait aujourd'hui?</label>
                         <input type="text" name="sport" id="search-input" class="form-control"/>
                     </div>
                     <div class="form-group">
-                        <label for="temps" class="control-label">Combien de temps?(en heure)</label>
+                        <label for="temps" class="control-label member-title-field">Combien de temps?(en heure)</label>
                         <input size="4" type="text" name="timesport" class="form-control" id="temps" placeholder="Qté">
                     </div>
                     <div class="form-group">
@@ -199,9 +199,9 @@ if (isset($_POST['sp'])) {
 </div>
 <div class="row">
     <div class="col-sm-6">
-        <div class="col-sm-offset-1 col-sm-10">
-            <form class="form-inline" method="post">
-                <div class="form-group">
+        <div class="col-sm-offset-1 col-sm-10 listeProduit">
+            <form class="form-inline datePicker" method="post">
+                <div class="form-group ">
                     <?php if (isset($_POST['godate'])) {
                         ?>
                         <p>Date: <input type="text" name="date" id="datepicker" value="<?= $_POST['date']; ?>"></p>

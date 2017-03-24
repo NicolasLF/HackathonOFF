@@ -26,20 +26,6 @@ $pdo = new PDO(DSN, USER, PASS);
 
 
 $id = $_GET["id"];
-//$name = $_GET['name'];
-//echo $name;
-//echo "<br/>";
-//$image = $_GET['img'];
-//echo "<img src=" . $image . ">";
-//echo "<br/>";
-//$quantity = $_GET['quantity'];
-//echo $quantity;
-//echo "<br/>";
-//$grade = $_GET['grade'];
-//echo $grade;
-//echo "<br/>";
-//$energy = $_GET['energy'];
-//echo $energy;
 
 function cleanString($string) {
     // on supprime : majuscules ; / ? : @ & = + $ , . ! ~ * ( ) les espaces multiples et les underscore

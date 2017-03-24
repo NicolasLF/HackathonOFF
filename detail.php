@@ -7,7 +7,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>EatnRun</title>
+    <title>Eat N Run</title>
 
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -173,12 +173,7 @@ if (isset($_POST['sport'])) {
 ?>
 </div>
 </div>
-<?php
 
-    if (isset($_SESSION['id'])) {
-        echo '<a type="submit" href="membre/index.php" class="btn btn-default" name="record" value="Enregistrer mon repas">';
-    }
-?>
 </div>
 </body>
 
